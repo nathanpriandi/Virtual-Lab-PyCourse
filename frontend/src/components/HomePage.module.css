@@ -1,0 +1,17 @@
+.moduleCard {
+  border-radius: 8px;
+  border: 1px solid #090A6D;
+  padding: 1rem;
+  margin: 1rem;
+  background-color: #fff;
+}
+
+.moduleCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+.moduleLink {
+  text-decoration: none; 
+  color: inherit; 
+}

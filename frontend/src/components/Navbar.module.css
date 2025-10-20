@@ -1,0 +1,35 @@
+.navbar {
+  background-color: var(--navy-blue-dark);
+  padding: 1rem 2rem;
+  color: var(--white-primary);
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+.logoLink {
+  text-decoration: none;
+  color: var(--white-primary);
+}
+
+.logoLink h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--white-primary);
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navLink {
+  text-decoration: none;
+  color: var(--white-primary);
+  font-weight: 700;
+  transition: opacity 0.3s ease;
+}
+
+.navLink:hover {
+  opacity: 0.8;
+}

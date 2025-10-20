@@ -1,0 +1,75 @@
+Fase 1: Membangun "Wajah" Aplikasi (Frontend UI)
+Di fase ini, kita fokus untuk membangun tampilan visual dan interaksi dasar tanpa menghubungkannya ke database atau logika server terlebih dahulu. Tujuannya adalah membuat "kerangka" aplikasi yang bisa dilihat dan diklik.
+
+Inisialisasi Proyek React: Di dalam folder frontend/, buat proyek React baru menggunakan create-react-app atau Vite.
+
+Membangun Komponen Statis: Buat komponen UI dasar yang akan sering dipakai, seperti Tombol, Navbar, dan Code Editor.
+
+Membuat Halaman-Halaman:
+
+Buat file untuk setiap halaman utama: AuthPage.jsx, HomePage.jsx, ModulePage.jsx, dan ProfilePage.jsx.
+
+Susun tata letak setiap halaman menggunakan komponen yang sudah dibuat. Gunakan data dummy (data palsu) untuk menampilkan daftar modul atau progres belajar.
+
+Implementasi Navigasi (Routing): Gunakan library seperti react-router-dom agar pengguna bisa berpindah-pindah antar halaman.
+
+Styling Sesuai Desain: Terapkan styling menggunakan CSS sesuai dengan PRD, termasuk tipografi Roboto dan skema warna yang ditentukan.
+
+Hasil Fase 1: Anda memiliki sebuah website yang cantik dan bisa diklik, namun belum bisa menyimpan data atau melakukan login sungguhan.
+
+
+
+Fase 2: Membangun "Otak" Aplikasi (Backend Logic)
+Sekarang kita beralih ke backend. Kita akan membuat fungsi-fungsi di Vercel yang akan menangani semua logika penting seperti autentikasi dan penyimpanan data.
+
+Setup Serverless Functions: Konfigurasikan folder backend/api/ Anda agar Vercel mengenali setiap file di dalamnya sebagai sebuah endpoint.
+
+Implementasi Autentikasi Pengguna:
+
+Buat fungsi auth.js.
+
+Implementasikan alur Google OAuth untuk proses login. Fungsi ini akan menangani pengalihan ke Google, menerima data pengguna, dan mengelola sesi.
+
+Implementasi Logika Progres & Nilai:
+
+Buat fungsi progress.js untuk mengambil dan menyimpan progres belajar modul pengguna ("Completed" atau "Not Completed").
+
+Buat fungsi quiz.js untuk menerima jawaban kuis/ujian, menghitung nilai, dan menyimpannya ke database.
+
+Setup Database: Pilih dan konfigurasikan layanan database (seperti Vercel Postgres, MongoDB Atlas, atau Firebase) untuk menyimpan data pengguna, progres, dan nilai.
+
+Hasil Fase 2: Anda memiliki serangkaian API (URL) yang siap digunakan. Anda bisa mengujinya menggunakan alat seperti Postman atau Insomnia untuk memastikan logikanya berjalan benar.
+
+Fase 3: Menghubungkan "Wajah" dan "Otak" (Integrasi)
+Ini adalah fase di mana keajaiban full-stack terjadi. Kita akan membuat aplikasi React kita berkomunikasi dengan Serverless Functions yang sudah kita buat.
+
+Koneksi Frontend ke Backend: Di dalam folder frontend/src/api/, buat fungsi-fungsi untuk mengirim permintaan (request) ke endpoint-endpoint backend Anda (misalnya, loginWithGoogle(), getUserProgress()).
+
+Login Fungsional: Hubungkan tombol "Login with Google" di AuthPage.jsx agar memanggil API autentikasi Anda. Setelah berhasil, simpan status login di React dan arahkan pengguna ke halaman utama.
+
+Menampilkan Data Dinamis:
+
+Di halaman Profil, panggil API untuk mengambil data nama, foto, progres, dan nilai pengguna, lalu tampilkan di UI.
+
+
+Ganti data dummy di halaman modul dengan data asli dari backend.
+
+
+Menyimpan Progres & Nilai: Saat pengguna menyelesaikan kuis atau ujian, panggil API yang sesuai untuk mengirim jawaban dan menyimpan hasilnya ke database.
+
+Hasil Fase 3: Anda memiliki aplikasi web yang berfungsi penuh sesuai dengan semua requirements di PRD Anda.
+
+Fase 4: Pengujian dan Deployment (Go Live!)
+Sebelum proyek diluncurkan, kita harus memastikan semuanya berjalan lancar dan siap digunakan oleh orang lain.
+
+Pengujian End-to-End: Coba seluruh alur aplikasi dari sudut pandang pengguna. Mulai dari mendaftar, belajar modul, mengerjakan kuis, hingga melihat progres di halaman profil. Catat dan perbaiki setiap bug atau keanehan yang Anda temukan.
+
+
+Deployment Frontend: Deploy aplikasi React Anda ke GitHub Pages sesuai rencana.
+
+
+Deployment Backend: Backend Anda secara otomatis sudah ter-deploy setiap kali Anda melakukan git push ke repository yang terhubung dengan Vercel.
+
+Konfigurasi Final: Pastikan semua variabel lingkungan (seperti kunci API Google atau koneksi database) sudah diatur dengan benar di Vercel, bukan disimpan di dalam kode.
+
+Hasil Fase 4: Website "PyCourse Virtual Lab" Anda sudah live dan bisa diakses oleh siapa saja di internet!
