@@ -9,7 +9,7 @@
 .editorHeader {
   background-color: #e0e0e0;
   padding: 0.5rem 1rem;
-  font-family: 'Roboto', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-weight: 500;
 }
 
@@ -17,7 +17,7 @@
   flex-grow: 1;
   border: none;
   padding: 1rem;
-  font-family: 'Roboto', monospace;
+  font-family: 'Courier New', Courier, monospace;
   font-size: 1rem;
   background-color: #fff;
   color: #333;
@@ -33,7 +33,7 @@
   background-color: var(--black-primary);
   color: var(--white-primary);
   padding: 1rem;
-  font-family: 'Roboto', monospace;
+  font-family: 'Courier New', Courier, monospace;
   overflow-y: auto;
 }
 

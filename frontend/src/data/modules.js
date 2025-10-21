@@ -3,10 +3,10 @@ export const modules = [
     id: 'variables-syntax', 
     title: 'Variables & Syntax',
     materi: `
-      <h2>Memulai dengan Python</h2>
+      <h3>Memulai dengan Python</h3>
       <p>Python dikenal dengan sintaksnya yang sederhana dan mudah dibaca, mirip dengan bahasa Inggris. Python menggunakan indentasi (spasi di awal baris) untuk mendefinisikan blok kode, tidak seperti bahasa lain yang sering menggunakan kurung kurawal.</p>
 
-      <h2>Apa itu Variabel?</h2>
+      <h3>Apa itu Variabel?</h3>
       <p>Variabel adalah wadah untuk menyimpan nilai data. Dalam Python, variabel dibuat saat Anda pertama kali memberinya nilai. Anda tidak perlu mendeklarasikan tipe variabel secara eksplisit.</p>
       <pre><code># x adalah variabel bertipe int (integer)
 x = 5
@@ -17,10 +17,10 @@ nama = "Michael"
 print(x)
 print(nama)</code></pre>
       
-      <h2>Aturan Penamaan Variabel</h2>
+      <h3>Aturan Penamaan Variabel</h3>
       <p>Sebuah variabel harus dimulai dengan huruf atau karakter garis bawah (_). Variabel tidak bisa dimulai dengan angka dan hanya boleh berisi karakter alfanumerik dan garis bawah (A-z, 0-9, dan _). Ingat, nama variabel di Python bersifat <b>case-sensitive</b> (<code>usia</code> dan <code>USIA</code> adalah dua variabel yang berbeda).</p>
       
-      <h2>Komentar (Comments)</h2>
+      <h3>Komentar (Comments)</h3>
       <p>Komentar digunakan untuk menjelaskan kode dan membuat kode lebih mudah dibaca. Komentar di Python dimulai dengan tanda <code>#</code>.</p>
       <pre><code># Ini adalah komentar satu baris
 print("Hello, World!")</code></pre>
@@ -30,7 +30,7 @@ print("Hello, World!")</code></pre>
     id: 'data-types', 
     title: 'Data Types',
     materi: `
-      <h2>Tipe Data Bawaan</h2>
+      <h3>Tipe Data Bawaan</h3>
       <p>Variabel dapat menyimpan data dari tipe yang berbeda, dan tipe yang berbeda dapat melakukan hal yang berbeda. Python memiliki tipe data bawaan berikut secara default:</p>
       <ul>
         <li><b>Text Type:</b> <code>str</code></li>
@@ -42,7 +42,7 @@ print("Hello, World!")</code></pre>
         <li><b>Binary Types:</b> <code>bytes</code>, <code>bytearray</code>, <code>memoryview</code></li>
       </ul>
       
-      <h2>Mendapatkan Tipe Data</h2>
+      <h3>Mendapatkan Tipe Data</h3>
       <p>Anda bisa mendapatkan tipe data dari variabel apa pun dengan menggunakan fungsi <code>type()</code>.</p>
       <pre><code>x = 5
 print(type(x))  # Output: <class 'int'>
@@ -58,7 +58,7 @@ print(type(z))  # Output: <class 'float'></code></pre>
     id: 'numbers', 
     title: 'Numbers',
     materi: `
-      <h2>Tipe Angka Python</h2>
+      <h3>Tipe Angka Python</h3>
       <p>Ada tiga tipe angka numerik dalam Python: <code>int</code>, <code>float</code>, dan <code>complex</code>.</p>
       
       <h3>Integer (int)</h3>
@@ -84,7 +84,7 @@ z = -5j</code></pre>
     id: 'casting', 
     title: 'Casting',
     materi: `
-      <h2>Apa itu Casting?</h2>
+      <h3>Apa itu Casting?</h3>
       <p>Terkadang, Anda mungkin perlu menentukan tipe data pada sebuah variabel. Ini dapat dilakukan dengan *casting*. Python adalah bahasa berorientasi objek, dan karenanya ia menggunakan fungsi konstruktor untuk melakukan casting:</p>
       <ul>
         <li><code>int()</code> - membuat bilangan bulat dari literal integer, float (dengan membulatkan ke bawah), atau string (jika string mewakili bilangan bulat).</li>
@@ -92,7 +92,7 @@ z = -5j</code></pre>
         <li><code>str()</code> - membuat string dari berbagai tipe data, termasuk integer, float, dan string.</li>
       </ul>
       
-      <h2>Contoh Casting</h2>
+      <h3>Contoh Casting</h3>
       <pre><code># Integer
 x = int(1)     # x akan menjadi 1
 y = int(2.8)   # y akan menjadi 2
@@ -113,19 +113,19 @@ u = str(3.0)     # u akan menjadi '3.0'</code></pre>
     id: 'boolean', 
     title: 'Boolean',
     materi: `
-      <h2>Nilai Boolean</h2>
+      <h3>Nilai Boolean</h3>
       <p>Dalam pemrograman, Anda sering perlu tahu apakah suatu ekspresi itu <code>True</code> atau <code>False</code>. Anda dapat mengevaluasi ekspresi apa pun di Python, dan mendapatkan salah satu dari dua jawaban, <code>True</code> atau <code>False</code>.</p>
       
-      <h2>Mengevaluasi Nilai</h2>
+      <h3>Mengevaluasi Nilai</h3>
       <p>Saat Anda membandingkan dua nilai, ekspresi tersebut dievaluasi dan Python mengembalikan jawaban Boolean.</p>
       <pre><code>print(10 > 9)   # Output: True
 print(10 == 9)  # Output: False
 print(10 < 9)   # Output: False</code></pre>
       
-      <h2>Hampir Semua Nilai adalah True</h2>
+      <h3>Hampir Semua Nilai adalah True</h3>
       <p>Hampir semua nilai dievaluasi sebagai <code>True</code> jika memiliki semacam konten. String apa pun adalah <code>True</code>, kecuali string kosong. Angka apa pun adalah <code>True</code>, kecuali 0. List, tuple, set, dan dictionary apa pun adalah <code>True</code>, kecuali yang kosong.</p>
       
-      <h2>Beberapa Nilai adalah False</h2>
+      <h3>Beberapa Nilai adalah False</h3>
       <p>Nilai-nilai berikut dievaluasi sebagai <code>False</code>: <code>False</code>, <code>None</code>, <code>0</code>, <code>""</code>, <code>()</code>, <code>[]</code>, <code>{}</code>.</p>
     `
   },
@@ -133,7 +133,7 @@ print(10 < 9)   # Output: False</code></pre>
     id: 'operator', 
     title: 'Operator',
     materi: `
-      <h2>Operator Python</h2>
+      <h3>Operator Python</h3>
       <p>Operator digunakan untuk melakukan operasi pada variabel dan nilai. Python membagi operator ke dalam beberapa grup:</p>
       <ul>
         <li>Operator Aritmatika</li>
@@ -144,7 +144,7 @@ print(10 < 9)   # Output: False</code></pre>
         <li>Operator Keanggotaan (Membership)</li>
       </ul>
 
-      <h2>Operator Aritmatika</h2>
+      <h3>Operator Aritmatika</h3>
       <p>Digunakan dengan nilai numerik untuk melakukan operasi matematika umum:</p>
       <ul>
         <li><code>+</code> (Penjumlahan)</li>
@@ -161,7 +161,7 @@ print(x + y)  # Output: 13
 print(x % y)  # Output: 1
 print(x // y) # Output: 3</code></pre>
 
-      <h2>Operator Perbandingan</h2>
+      <h3>Operator Perbandingan</h3>
       <p>Digunakan untuk membandingkan dua nilai:</p>
       <ul>
         <li><code>==</code> (Sama dengan)</li>
@@ -177,7 +177,7 @@ print(x // y) # Output: 3</code></pre>
     id: 'if-else', 
     title: 'If Else',
     materi: `
-      <h2>Kondisi Python dan Pernyataan If</h2>
+      <h3>Kondisi Python dan Pernyataan If</h3>
       <p>Python mendukung kondisi logika umum dari matematika:</p>
       <ul>
         <li>Sama dengan: <code>a == b</code></li>
@@ -188,7 +188,7 @@ print(x // y) # Output: 3</code></pre>
         <li>Lebih besar dari atau sama dengan: <code>a >= b</code></li>
       </ul>
 
-      <h2>If, Elif, dan Else</h2>
+      <h3>If, Elif, dan Else</h3>
       <p>Kondisi ini dapat digunakan dalam pernyataan "if" dan "loop".</p>
       <pre><code>a = 200
 b = 33
@@ -212,7 +212,7 @@ else:
     id: 'while-loop', 
     title: 'While Loop',
     materi: `
-      <h2>Python While Loop</h2>
+      <h3>Python While Loop</h3>
       <p>Dengan *while loop*, kita dapat mengeksekusi satu set pernyataan selama kondisi bernilai benar (True).</p>
       <pre><code># Cetak i selama i kurang dari 6
 i = 1
@@ -221,7 +221,7 @@ while i < 6:
   i += 1  # Penting! Jangan lupa menaikkan i</code></pre>
       <p><b>Penting:</b> Ingatlah untuk menambah nilai variabel i, jika tidak, *loop* akan berlanjut selamanya (infinite loop).</p>
 
-      <h2>Kata Kunci <code>break</code></h2>
+      <h3>Kata Kunci <code>break</code></h3>
       <p>Dengan pernyataan <code>break</code>, kita dapat menghentikan *loop* bahkan jika kondisi *while* masih benar.</p>
       <pre><code># Keluar dari loop saat i adalah 3
 i = 1
@@ -231,7 +231,7 @@ while i < 6:
     break
   i += 1</code></pre>
 
-      <h2>Kata Kunci <code>continue</code></h2>
+      <h3>Kata Kunci <code>continue</code></h3>
       <p>Dengan pernyataan <code>continue</code>, kita dapat menghentikan iterasi saat ini dan melanjutkan ke iterasi berikutnya.</p>
       <pre><code># Lewati iterasi jika i adalah 3
 i = 0
@@ -246,16 +246,16 @@ while i < 6:
     id: 'for-loop', 
     title: 'For Loop',
     materi: `
-      <h2>Python For Loop</h2>
+      <h3>Python For Loop</h3>
       <p>Sebuah *for loop* digunakan untuk melakukan iterasi (perulangan) pada sebuah urutan (seperti <code>list</code>, <code>tuple</code>, <code>dict</code>, <code>set</code>, atau <code>string</code>).</p>
       
-      <h2>Iterasi pada String</h2>
+      <h3>Iterasi pada String</h3>
       <p>Bahkan string adalah objek yang dapat diiterasi, mereka berisi urutan karakter:</p>
       <pre><code># Ulangi huruf-huruf dalam kata "banana"
 for x in "banana":
   print(x)</code></pre>
 
-      <h2>Kata Kunci <code>break</code></h2>
+      <h3>Kata Kunci <code>break</code></h3>
       <p>Sama seperti di *while loop*, <code>break</code> dapat menghentikan *loop* sebelum selesai.</p>
       <pre><code>fruits = ["apple", "banana", "cherry"]
 for x in fruits:
@@ -263,7 +263,7 @@ for x in fruits:
   if x == "banana":
     break</code></pre>
 
-      <h2>Fungsi <code>range()</code></h2>
+      <h3>Fungsi <code>range()</code></h3>
       <p>Untuk mengulang blok kode sebanyak jumlah tertentu, kita bisa menggunakan fungsi <code>range()</code>. Fungsi <code>range()</code> mengembalikan urutan angka, dimulai dari 0 secara default, dan bertambah 1, dan berakhir pada angka yang ditentukan.</p>
       <pre><code># Cetak angka dari 0 hingga 5
 for x in range(6):
@@ -274,10 +274,10 @@ for x in range(6):
     id: 'functions', 
     title: 'Functions',
     materi: `
-      <h2>Apa itu Fungsi?</h2>
+      <h3>Apa itu Fungsi?</h3>
       <p>Fungsi adalah blok kode yang hanya berjalan ketika dipanggil. Anda dapat meneruskan data, yang dikenal sebagai parameter, ke dalam suatu fungsi. Sebuah fungsi dapat mengembalikan data sebagai hasilnya.</p>
       
-      <h2>Membuat dan Memanggil Fungsi</h2>
+      <h3>Membuat dan Memanggil Fungsi</h3>
       <p>Dalam Python, fungsi didefinisikan menggunakan kata kunci <code>def</code>:</p>
       <pre><code># Mendefinisikan fungsi
 def sapaan_saya():
@@ -286,7 +286,7 @@ def sapaan_saya():
 # Memanggil fungsi
 sapaan_saya()</code></pre>
 
-      <h2>Argumen (Parameter)</h2>
+      <h3>Argumen (Parameter)</h3>
       <p>Informasi dapat diteruskan ke fungsi sebagai argumen. Argumen ditentukan setelah nama fungsi, di dalam tanda kurung.</p>
       <pre><code>def sapaan_nama(nama):
   print("Halo, " + nama + "!")
@@ -294,7 +294,7 @@ sapaan_saya()</code></pre>
 sapaan_nama("Michael")
 sapaan_nama("Budi")</code></pre>
 
-      <h2>Kata Kunci <code>return</code></h2>
+      <h3>Kata Kunci <code>return</code></h3>
       <p>Untuk membiarkan fungsi mengembalikan nilai, gunakan pernyataan <code>return</code>:</p>
       <pre><code>def kali_lima(x):
   return 5 * x

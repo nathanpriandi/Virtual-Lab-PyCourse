@@ -1,12 +1,17 @@
 import React from 'react';
 import styles from './Navbar.module.css';
 import { Link } from 'react-router-dom'; 
+import logoImage from '../assets/pycourse-logo.png';
 
 function Navbar() {
   return (
     <nav className={styles.navbar}>
       <Link to="/" className={styles.logoLink}>
-        <h1>PyCourse Virtual Lab</h1>
+        <img 
+          src={logoImage} 
+          alt="PyCourse Logo" 
+          className={styles.logoImage} 
+        />
       </Link>
       
       <div className={styles.navLinks}>
