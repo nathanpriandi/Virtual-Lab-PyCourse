@@ -37,10 +37,11 @@
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .materiSide code {
-  font-family: 'Roboto', monospace;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 /* ... (kode .pageContainer, .moduleLayout, dll. Anda) ... */
@@ -51,7 +52,7 @@
   font-size: 2rem; /* Ukuran lebih besar untuk sub-judul */
   font-weight: 700;
   color: var(--navy-blue-dark);
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 1rem;
   border-bottom: 2px solid #eee; /* Garis bawah tipis */
   padding-bottom: 0.5rem;
@@ -61,9 +62,11 @@
   font-family: 'Lato', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--black-primary);
-  margin-top: 1.5rem;
+  color: var(--navy-blue-dark);
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
+  border-bottom: 2px solid #eee; /* Garis bawah tipis */
+  padding-bottom: 0.5rem;
 }
 
 .materiSide p, .materiSide ul, .materiSide li {
@@ -79,7 +82,7 @@
 }
 
 .materiSide code {
-  font-family: 'Roboto', monospace;
+  font-family: 'Courier New', Courier, monospace;
   background-color: #f4f4f4;
   color: var(--navy-blue-dark);
   padding: 2px 5px;
@@ -88,14 +91,17 @@
 }
 
 .materiSide pre {
-  font-family: 'Roboto', monospace;
-  background-color: var(--black-primary);
-  color: #f8f8f2; /* Warna teks terang untuk latar gelap */
-  padding: 1rem;
-  border-radius: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: var(--black-primary); /* Background hitam gelap */
+  color: var(--white-primary); /* Teks putih */
+  padding: 1.5rem;
+  border-radius: 6px;
+  border-left: 4px solid var(--navy-blue-light); /* Border kiri biru terang */
   overflow-x: auto; /* Scroll horizontal jika kode panjang */
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Shadow untuk depth */
+  position: relative;
 }
 
 /* Ini untuk menghapus style default 'code' di dalam 'pre' */

@@ -5,7 +5,7 @@ function CodeEditor() {
   return (
     <div className={styles.editorContainer}>
       <div className={styles.editorHeader}>
-        <span>Editor Kode (Python)</span>
+        <span>Code Editor for Python</span>
       </div>
       <textarea 
         className={styles.textArea} 

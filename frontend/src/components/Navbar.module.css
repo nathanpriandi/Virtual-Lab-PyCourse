@@ -10,6 +10,8 @@
 .logoLink {
   text-decoration: none;
   color: var(--white-primary);
+  display: flex;
+  align-items: center;
 }
 
 .logoLink h1 {
@@ -32,4 +34,10 @@
 
 .navLink:hover {
   opacity: 0.8;
+}
+
+.logoImage {
+  height: 40px;
+  width: auto;   
+  display: block; 
 }
