@@ -6,13 +6,9 @@ import CodeEditor from '../components/CodeEditor';
 import styles from './ModulePage.module.css';
 
 function ModulePage() {
-  // 1. Ambil 'moduleId' dari URL
   const { moduleId } = useParams();
 
-  // 2. Cari data modul yang sesuai
   const module = modules.find((m) => m.id === moduleId);
-
-  // 3. Penjagaan jika modul tidak ditemukan
   if (!module) {
     return (
       <div>
@@ -25,20 +21,15 @@ function ModulePage() {
       </div>
     );
   }
-
-  // 4. Jika ditemukan, tampilkan tata letak 70/30
   return (
     <div className={styles.pageContainer}>
       <Navbar />
       <div className={styles.moduleLayout}>
-        {/* Kolom 70% untuk Materi */}
         <div className={styles.materiSide}>
           <h2>{module.title}</h2>
-          {/* Menampilkan materi HTML dengan aman */}
           <div dangerouslySetInnerHTML={{ __html: module.materi }} />
         </div>
 
-        {/* Kolom 30% untuk Code Editor */}
         <div className={styles.editorSide}>
           <CodeEditor />
         </div>

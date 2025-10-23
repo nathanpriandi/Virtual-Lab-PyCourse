@@ -9,8 +9,11 @@
 .editorHeader {
   background-color: #e0e0e0;
   padding: 0.5rem 1rem;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Lato', sans-serif;
   font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .textArea {
@@ -40,4 +43,26 @@
 .outputArea p {
   margin: 0 0 0.5rem 0;
   color: var(--gray-light);
+  font-family: 'Lato', sans-serif;
+}
+
+.runButton {
+  background-color: var(--navy-blue);
+  color: var(--white-primary);
+  border: none;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+}
+
+.runButton:hover {
+  background-color: var(--navy-blue);
+}
+
+.runButton:disabled {
+  background-color: var(--gray-light);
+  cursor: not-allowed;
 }

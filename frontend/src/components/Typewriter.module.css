@@ -7,8 +7,6 @@
   position: relative;
   min-height: 2rem;
 }
-
-/* Kursor berkedip menggunakan pseudo-element ::after */
 .typewriterText::after {
   content: '|';
   position: absolute;
@@ -17,8 +15,6 @@
   color: var(--navy-blue);
   animation: blink 1s infinite;
 }
-
-/* Animasi Keyframes untuk 'blink' */
 @keyframes blink {
   0%, 100% {
     opacity: 1;
