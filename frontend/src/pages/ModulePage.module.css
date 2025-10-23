@@ -1,60 +1,37 @@
-/* src/pages/ModulePage.module.css */
 .pageContainer {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Mengisi tinggi layar penuh */
+  height: 100vh;
 }
 
 .moduleLayout {
   display: flex;
-  flex-grow: 1; /* Mengisi sisa ruang di bawah Navbar */
-  overflow: hidden; /* Mencegah double scrollbar */
+  flex-grow: 1;
+  overflow: hidden;
 }
 
-/* Kolom 70% */
 .materiSide {
   flex-basis: 70%;
-  /* Kurangi padding atas agar jarak dari Navbar tidak terlalu besar */
-  padding: 1rem 2rem 2rem;
-  overflow-y: auto; /* Hanya kolom ini yang bisa di-scroll */
+  flex-shrink: 0;
+  padding: 2rem;
+  overflow-y: auto;
   background-color: var(--white-primary);
 }
 
-/* Hilangkan margin-top default pada elemen pertama (biasanya H2 judul modul) */
-.materiSide > :first-child {
-  margin-top: 0;
-}
-
-/* Kolom 30% */
 .editorSide {
   flex-basis: 30%;
-  height: 100%; /* Memastikan CodeEditor mengisi tinggi */
+  flex-shrink: 0;
+  height: 100%;
 }
 
-/* Styling untuk materi HTML yang di-render */
-.materiSide pre {
-  background-color: #f4f4f4;
-  padding: 1rem;
-  border-radius: 8px;
-  overflow-x: auto;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-.materiSide code {
-  font-family: 'Courier New', Courier, monospace;
-}
-
-/* ... (kode .pageContainer, .moduleLayout, dll. Anda) ... */
-
-/* Menargetkan elemen di dalam area materi */
 .materiSide h2 {
   font-family: 'Lato', sans-serif;
-  font-size: 2rem; /* Ukuran lebih besar untuk sub-judul */
+  font-size: 2rem;
   font-weight: 700;
-  color: var(--navy-blue);
-  margin-top: 1rem;
+  color: var(--navy-blue-dark);
+  margin-top: 0;
   margin-bottom: 1rem;
-  border-bottom: 2px solid #eee; /* Garis bawah tipis */
+  border-bottom: 2px solid #eee;
   padding-bottom: 0.5rem;
 }
 
@@ -62,17 +39,15 @@
   font-family: 'Lato', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--navy-blue);
-  margin-top: 1rem;
+  color: var(--black-primary);
+  margin-top: 1.5rem;
   margin-bottom: 0.5rem;
-  border-bottom: 2px solid #eee; /* Garis bawah tipis */
-  padding-bottom: 0.5rem;
 }
 
 .materiSide p, .materiSide ul, .materiSide li {
   font-family: 'Lato', sans-serif;
   font-size: 1rem;
-  line-height: 1.6; /* Jarak antar baris agar mudah dibaca */
+  line-height: 1.6; 
   color: var(--gray-dark);
   margin-bottom: 1rem;
 }
@@ -92,19 +67,15 @@
 
 .materiSide pre {
   font-family: 'Courier New', Courier, monospace;
-  background-color: var(--black-primary); /* Background hitam gelap */
-  color: var(--white-primary); /* Teks putih */
-  padding: 1.5rem;
-  border-radius: 6px;
-  border-left: 4px solid var(--navy-blue-light); /* Border kiri biru terang */
-  overflow-x: auto; /* Scroll horizontal jika kode panjang */
+  background-color: var(--black-primary);
+  color: #f8f8f2; 
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto; 
   font-size: 0.95rem;
-  line-height: 1.6;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Shadow untuk depth */
-  position: relative;
+  line-height: 1.5;
 }
 
-/* Ini untuk menghapus style default 'code' di dalam 'pre' */
 .materiSide pre code {
   background-color: transparent;
   color: inherit;

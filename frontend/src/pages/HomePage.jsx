@@ -14,7 +14,6 @@ function HomePage() {
         <div className={styles.headerContainer}>
           <h1>Selamat Datang di PyCourse!</h1>
           
-          {/* UBAH BAGIAN INI */}
           <Typewriter 
             texts={[
               "user = 'PyCourse'",
@@ -26,7 +25,6 @@ function HomePage() {
             deletingSpeed={75}
             pauseDuration={1500}
           />
-          {/* BATAS PERUBAHAN */}
 
         </div>
 

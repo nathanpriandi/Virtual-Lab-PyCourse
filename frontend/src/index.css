@@ -1,4 +1,3 @@
-/* 1. Definisi Variabel Warna (Sesuai PRD) */
 :root {
   --navy-blue: #0C0F97;
   --black-primary: #0C0C0C;
@@ -7,24 +6,21 @@
   --white-primary: #FFFFFF;
 }
 
-/* 2. Aturan Dasar untuk Seluruh Halaman */
 body {
   margin: 0;
-  font-family: 'Lato', sans-serif; /* Font default untuk semua teks */
+  font-family: 'Lato', sans-serif;
   background-color: var(--white-primary);
   color: var(--black-primary);
 }
 
-/* 3. Aturan untuk Heading */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lato', sans-serif; /* Menegaskan font untuk heading */
-  font-weight: 700; /* Membuat heading lebih tebal */
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
   color: var(--navy-blue);
 }
 
-/* 4. Aturan untuk Elemen Kode */
 code, pre {
-  font-family: 'Courier New', Courier, monospace; /* Font khusus untuk kode */
+  font-family: 'Courier New', Courier, monospace;
   background-color: #f4f4f4;
   padding: 2px 4px;
   border-radius: 4px;

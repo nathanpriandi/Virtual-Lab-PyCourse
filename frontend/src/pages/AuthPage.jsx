@@ -6,7 +6,7 @@ function AuthPage() {
     <div>
       <h1>Selamat Datang di PyCourse</h1>
       <p>Silakan login untuk melanjutkan.</p>
-      <Button text="Login with Google" /> {/* <-- Menggunakan komponen Button */}
+      <Button text="Login with Google" />
     </div>
   );
 }
