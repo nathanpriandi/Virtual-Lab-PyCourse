@@ -15,3 +15,16 @@
   text-decoration: none; 
   color: inherit; 
 }
+
+.headerContainer {
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.headerContainer h1 {
+  margin: 0.5rem 1rem 1rem 1rem;
+  font-size: 2.5rem;
+  color: var(--navy-blue);
+}

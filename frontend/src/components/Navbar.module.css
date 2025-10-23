@@ -1,5 +1,5 @@
 .navbar {
-  background-color: var(--navy-blue-dark);
+  background-color: var(--navy-blue);
   padding: 1rem 2rem;
   color: var(--white-primary);
   display: flex; 

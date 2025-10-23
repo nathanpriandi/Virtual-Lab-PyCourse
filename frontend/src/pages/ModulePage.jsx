@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { modules } from '../data/modules';
 import Navbar from '../components/Navbar';
 import CodeEditor from '../components/CodeEditor';
-import styles from '../components/ModulePage.module.css';
+import styles from './ModulePage.module.css';
 
 function ModulePage() {
   // 1. Ambil 'moduleId' dari URL
