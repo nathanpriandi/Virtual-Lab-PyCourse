@@ -51,7 +51,7 @@
   font-family: 'Lato', sans-serif;
   font-size: 2rem; /* Ukuran lebih besar untuk sub-judul */
   font-weight: 700;
-  color: var(--navy-blue-dark);
+  color: var(--navy-blue);
   margin-top: 1rem;
   margin-bottom: 1rem;
   border-bottom: 2px solid #eee; /* Garis bawah tipis */
@@ -62,7 +62,7 @@
   font-family: 'Lato', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--navy-blue-dark);
+  color: var(--navy-blue);
   margin-top: 1rem;
   margin-bottom: 0.5rem;
   border-bottom: 2px solid #eee; /* Garis bawah tipis */

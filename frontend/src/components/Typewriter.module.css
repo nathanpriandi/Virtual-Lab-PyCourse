@@ -1,0 +1,29 @@
+.typewriterText {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.5rem;
+  color: var(--navy-blue);
+  padding: 1rem 1rem;
+  display: inline-block;
+  position: relative;
+  min-height: 2rem;
+}
+
+/* Kursor berkedip menggunakan pseudo-element ::after */
+.typewriterText::after {
+  content: '|';
+  position: absolute;
+  right: 10px;
+  font-weight: 700;
+  color: var(--navy-blue);
+  animation: blink 1s infinite;
+}
+
+/* Animasi Keyframes untuk 'blink' */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}

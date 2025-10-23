@@ -1,7 +1,6 @@
 /* 1. Definisi Variabel Warna (Sesuai PRD) */
 :root {
-  --navy-blue-dark: #090A6D;
-  --navy-blue-light: #0C0F97;
+  --navy-blue: #0C0F97;
   --black-primary: #0C0C0C;
   --gray-dark: #525252;
   --gray-light: #696969;
@@ -20,7 +19,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lato', sans-serif; /* Menegaskan font untuk heading */
   font-weight: 700; /* Membuat heading lebih tebal */
-  color: var(--navy-blue-dark);
+  color: var(--navy-blue);
 }
 
 /* 4. Aturan untuk Elemen Kode */
