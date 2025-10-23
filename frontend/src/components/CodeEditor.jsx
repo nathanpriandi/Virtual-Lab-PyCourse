@@ -8,23 +8,27 @@ function CodeEditor() {
   const [isLoading, setIsLoading] = useState(true);
   const pyodideRef = useRef(null);
 
+  console.log('CodeEditor render - isLoading:', isLoading);
+
   useEffect(() => {
     async function setupPyodide() {
       try {
         setOutput('Memuat interpreter Python...\n');
         const pyodide = await loadPyodide({
-          indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.25.1/full/'
+          indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.29.0/full/'
         });
         pyodideRef.current = pyodide;
         pyodide.setStdout((text) => {
           setOutput((prevOutput) => prevOutput + text + '\n');
         });
         setOutput((prevOutput) => prevOutput + 'Interpreter siap. Silakan jalankan kode Anda.\n');
+        console.log('Setting isLoading to false');
         setIsLoading(false);
 
       } catch (error) {
         console.error("Gagal memuat Pyodide:", error);
         setOutput(`Gagal memuat interpreter: ${error.message}\n`);
+        setIsLoading(false);
       }
     }
 
@@ -56,10 +60,10 @@ function CodeEditor() {
           onClick={runCode} 
           disabled={isLoading}
           className={styles.runButton}
+          style={{ display: 'block' }}
         >
           {isLoading ? 'Loading...' : 'Run'}
         </button>
-
       </div>
       <textarea 
         className={styles.textArea} 
