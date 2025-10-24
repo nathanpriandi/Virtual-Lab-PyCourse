@@ -18,10 +18,20 @@ function CodeEditor() {
           indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.29.0/full/'
         });
         pyodideRef.current = pyodide;
-        pyodide.setStdout((text) => {
-          setOutput((prevOutput) => prevOutput + text + '\n');
+        
+        pyodide.setStdout({
+          batched: (text) => {
+            setOutput((prevOutput) => prevOutput + text);
+          }
         });
-        setOutput((prevOutput) => prevOutput + 'Interpreter siap. Silakan jalankan kode Anda.\n');
+        
+        pyodide.setStderr({
+          batched: (text) => {
+            setOutput((prevOutput) => prevOutput + text);
+          }
+        });
+        
+        setOutput('Interpreter siap. Silakan jalankan kode Anda.\n');
         console.log('Setting isLoading to false');
         setIsLoading(false);
 
@@ -34,6 +44,7 @@ function CodeEditor() {
 
     setupPyodide();
   }, []);
+  
   const runCode = async () => {
     const pyodide = pyodideRef.current;
 
@@ -43,12 +54,15 @@ function CodeEditor() {
     }
 
     try {
-      setOutput(''); 
+      setOutput('');
+      
       await pyodide.runPythonAsync(code);
+      
+      setOutput((prev) => prev || 'Kode dijalankan tanpa output.\n');
 
     } catch (error) {
       console.error(error);
-      setOutput(error.toString());
+      setOutput((prev) => prev + '\nError: ' + error.message);
     }
   };
 
@@ -60,7 +74,6 @@ function CodeEditor() {
           onClick={runCode} 
           disabled={isLoading}
           className={styles.runButton}
-          style={{ display: 'block' }}
         >
           {isLoading ? 'Loading...' : 'Run'}
         </button>
