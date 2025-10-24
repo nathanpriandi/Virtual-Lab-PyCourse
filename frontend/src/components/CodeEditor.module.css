@@ -1,48 +1,46 @@
 .editorContainer {
-  background-color: #f4f4f4;
-  border-left: 2px solid #ddd;
+  background-color: #fff;
+  border-left: 3px solid #ddd;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .editorHeader {
-  background-color: #e0e0e0;
+  flex-basis: 5%;
+  background-color: var(--white-primary);
+  color: var(--navy-blue);
   padding: 0.5rem 1rem;
   font-family: 'Lato', sans-serif;
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 3px solid #ddd;
 }
 
-.textArea {
+.editorWrapper {
   flex-grow: 1;
-  border: none;
-  padding: 1rem;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 1rem;
-  background-color: #fff;
-  color: #333;
+  flex-shrink: 0;
+  min-height: 0;
   resize: none;
-}
-
-.textArea:focus {
-  outline: none;
+  flex-basis: 55%;
 }
 
 .outputArea {
-  height: 150px;
-  background-color: var(--black-primary);
+  flex-basis: 40%;
+  background-color: var(--white-primary);
   color: var(--black-primary);
   padding: 1rem;
   font-family: 'Courier New', Courier, monospace;
   overflow-y: auto;
+  border-top: 3px solid #ddd;
 }
 
 .outputArea p {
   margin: 0 0 0.5rem 0;
-  color: var(--gray-light);
+  color: var(--black-primary);
   font-family: 'Lato', sans-serif;
 }
 
@@ -58,6 +56,7 @@
   font-size: 14px;
   transition: background-color 0.3s ease;
   min-width: 80px;
+  white-space: pre-wrap;
 }
 
 .runButton:hover:not(:disabled) {

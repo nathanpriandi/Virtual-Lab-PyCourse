@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './CodeEditor.module.css';
 import { loadPyodide } from 'pyodide';
+import CodeMirror from '@uiw/react-codemirror';
+import { python } from '@codemirror/lang-python';
+import { vscodeDark, vscodeLight } from '@uiw/codemirror-theme-vscode';
+import { EditorView } from '@codemirror/view';
 
 function CodeEditor() {
   const [code, setCode] = useState("print('Hello, World!')"); 
@@ -31,7 +35,7 @@ function CodeEditor() {
           }
         });
         
-        setOutput('Interpreter siap. Silakan jalankan kode Anda.\n');
+        setOutput('Interpreter siap.\n');
         console.log('Setting isLoading to false');
         setIsLoading(false);
 
@@ -78,11 +82,22 @@ function CodeEditor() {
           {isLoading ? 'Loading...' : 'Run'}
         </button>
       </div>
-      <textarea 
-        className={styles.textArea} 
+      
+      <CodeMirror
         value={code}
-        onChange={(e) => setCode(e.target.value)}
+        onChange={(value) => setCode(value)}
+        className={styles.editorWrapper}
+        theme={vscodeLight}
+        height='100%'
+        extensions={[python(), EditorView.lineWrapping]}
+        basicSetup={{
+          lineNumbers: true,
+          foldGutter: true,
+          indentOnInput: true,
+          autocompletion: true,
+        }}
       />
+      
       <div className={styles.outputArea}>
         <p>Output:</p>
         <pre><code>{output}</code></pre>

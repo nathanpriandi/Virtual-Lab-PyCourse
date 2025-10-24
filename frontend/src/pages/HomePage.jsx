@@ -28,8 +28,8 @@ function HomePage() {
 
         </div>
 
-        <p>Silakan pilih modul di bawah ini untuk memulai perjalanan belajar Python Anda.</p>        
-        <h3>Daftar Modul</h3>
+        <p style={{ padding: '0 0 0 1rem' }}>Silakan pilih modul di bawah ini untuk memulai perjalanan belajar Python Anda.</p>        
+        <h3 style={{ padding: '0 0 0 1rem' }}>Daftar Modul</h3>
         <div className={styles.moduleList}>
           {modules.map((module) => (
             <Link 
