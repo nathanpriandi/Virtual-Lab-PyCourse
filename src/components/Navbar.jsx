@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import logoImage from '../assets/pycourse-logo.png';
 
 function Navbar() {
+
+  const user = null;
+
   return (
     <nav className={styles.navbar}>
       <Link to="/" className={styles.logoLink}>
@@ -17,6 +20,14 @@ function Navbar() {
       <div className={styles.navLinks}>
         <Link to="/profile" className={styles.navLink}>Profile</Link>
       </div>
+
+      {user ? (
+        <ProfileButton user={user} />
+      ) : (
+        <a href="/api/auth/login" className="login-button">
+          Login with Google
+        </a>
+      )}
     </nav>
   );
 }
