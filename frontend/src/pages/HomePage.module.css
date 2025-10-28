@@ -4,6 +4,9 @@
   padding: 1rem;
   margin: 1rem;
   background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .moduleCard:hover {
@@ -33,4 +36,15 @@
   margin: 0.5rem 1rem 1rem 1rem;
   font-size: 2.5rem;
   color: var(--navy-blue);
+}
+
+.moduleCard.completed {
+  border-color: #28a745;
+  background-color: #f0fff0;
+}
+
+.checkmark {
+  color: #28a745;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
