@@ -30,6 +30,10 @@
   color: var(--white-primary);
   font-weight: 700;
   transition: opacity 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 .navLink:hover {
