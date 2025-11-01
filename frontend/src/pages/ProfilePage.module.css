@@ -79,6 +79,32 @@
   transform: scale(1);
 }
 
+.deleteAvatarButton {
+  position: absolute;
+  bottom: 5px;
+  left: 5px; /* Position on the opposite side of the edit button */
+  background: #ef4444; /* Red background */
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 0.7rem; /* Smaller font for a smaller word */
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.avatarWrapper:hover .deleteAvatarButton {
+  opacity: 1;
+  transform: scale(1);
+}
+
 .errorText {
   color: #ef4444;
   margin-bottom: 1.5rem;

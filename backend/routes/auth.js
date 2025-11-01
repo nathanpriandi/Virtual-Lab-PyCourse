@@ -132,11 +132,11 @@ router.get('/me', auth, async (req, res) => {
 // @desc    Update user avatar
 // @access  Private
 router.put('/me/avatar', auth, async (req, res) => {
-  const { avatar } = req.body;
-
-  if (!avatar) {
-    return res.status(400).json({ msg: 'Avatar identifier is required' });
+  // Allow avatar to be a string or null, but the field must be present
+  if (req.body.avatar === undefined) {
+    return res.status(400).json({ msg: 'Avatar field is required' });
   }
+  const { avatar } = req.body;
 
   try {
     const updatedUser = await User.findByIdAndUpdate(

@@ -28,13 +28,17 @@ const generateAvatarDataUri = (name) => {
   const svgString = `
     <svg width="150" height="150" xmlns="http://www.w3.org/2000/svg">
       <rect width="100%" height="100%" fill="${backgroundColor}" />
-      <text x="50%" y="50%" font-family="'Arial', sans-serif" font-size="60" fill="#ffffff" text-anchor="middle" dy=".3em">
+      <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="60" fill="#ffffff" text-anchor="middle" dy=".3em">
         ${initials}
       </text>
     </svg>
   `;
 
-  return `data:image/svg+xml;base64,${btoa(svgString)}`;
+  const encodedSvg = encodeURIComponent(
+    svgString.replace(/\s+/g, ' ').trim()
+  );
+
+  return `data:image/svg+xml,${encodedSvg}`;
 };
 
 const getAvatarSrc = (user) => {
@@ -118,6 +122,31 @@ function ProfilePage() {
     }
   };
 
+  const handleDeleteAvatar = async () => {
+    setError('');
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${API_BASE_URL}/api/auth/me/avatar`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-auth-token': token,
+        },
+        body: JSON.stringify({ avatar: null }),
+      });
+
+      if (response.ok) {
+        setUser(await response.json());
+      } else {
+        const errData = await response.json();
+        setError(errData.msg || 'Failed to remove avatar.');
+      }
+    } catch (err) {
+      setError('Network error. Please check your connection.');
+      console.error('Delete avatar error:', err);
+    }
+  };
+
   if (!user) {
     return <div className={styles.loading}>Loading...</div>;
   }
@@ -134,6 +163,11 @@ function ProfilePage() {
           <button onClick={handleEditClick} className={styles.editAvatarButton}>
             Ganti
           </button>
+          {user.avatar && (
+            <button onClick={handleDeleteAvatar} className={styles.deleteAvatarButton}>
+              Hapus
+            </button>
+          )}
           <input
             type="file"
             ref={fileInputRef}
