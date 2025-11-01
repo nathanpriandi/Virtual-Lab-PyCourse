@@ -66,12 +66,13 @@ function HomePage() {
                 className={styles.moduleLink}
               >
                 <div
-                  className={`${styles.moduleCard} ${
-                    isCompleted ? styles.completed : ''
-                  }`}
+                  className={`${styles.moduleCard} ${isCompleted ? styles.completed : ''} ${module.id === 'variables-syntax' ? styles.centeredImageCard : ''}`}
                 >
-                  <h4>{module.title}</h4>
-                  {isCompleted && <span className={styles.completionBadge}>Completed</span>}
+                  <img src={module.imageUrl} alt={module.title} className={styles.moduleImage} />
+                  <div className={styles.cardContent}>
+                    <h4>{module.title}</h4>
+                    {isCompleted && <span className={styles.completionBadge}>Completed</span>}
+                  </div>
                 </div>
               </Link>
             );

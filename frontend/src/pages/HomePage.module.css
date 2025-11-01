@@ -1,14 +1,11 @@
 .moduleCard {
-  border-radius: 12px;
-  border: 2px solid #e0e7ff;
-  padding: 1.5rem;
-  margin: 1rem;
-  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  border-radius: 16px;
+  border: 1px solid #e2e8f0; /* Slightly more subtle border */
+  background: white;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(12, 15, 151, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* More subtle shadow */
   position: relative;
   overflow: hidden;
 }
@@ -23,6 +20,7 @@
   background: linear-gradient(180deg, #0C0F97 0%, #4f46e5 100%);
   transform: scaleY(0);
   transition: transform 0.3s ease;
+  z-index: 1;
 }
 
 .moduleCard:hover::before {
@@ -31,13 +29,28 @@
 
 .moduleCard:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(12, 15, 151, 0.15);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* More pronounced hover shadow */
   border-color: #c7d2fe;
+}
+
+.moduleImage {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Modern 16:9 aspect ratio */
+  object-fit: cover;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.cardContent {
+  padding: 1.25rem; /* Slightly adjusted padding */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
 }
 
 .moduleCard h4 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.15rem; /* Slightly adjusted font size */
   color: var(--navy-blue);
   font-weight: 600;
   transition: color 0.3s ease;
@@ -75,9 +88,8 @@
 }
 
 .moduleCard.completed {
-  border-color: #86efac;
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.15);
+  border-color: #bbf7d0; /* Lighter green border */
+  background: #f0fdf4;
 }
 
 .moduleCard.completed::before {
@@ -85,12 +97,12 @@
 }
 
 .completionBadge {
-  color: #166534; /* Darker green for better contrast */
+  color: #166534;
   font-weight: 600;
-  font-size: 0.8rem; /* Smaller font for a badge */
+  font-size: 0.8rem;
   background: #dcfce7;
-  padding: 6px 12px; /* Padding for pill shape */
-  border-radius: 9999px; /* Pill shape */
+  padding: 6px 12px;
+  border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -114,6 +126,9 @@
 .moduleList {
   max-width: 1200px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem; /* Increased gap for separation */
 }
 
 .introText {
@@ -130,4 +145,12 @@
   color: var(--navy-blue);
   margin-bottom: 1rem;
   font-weight: 700;
+}
+
+/* --- Special Centered Layout for Specific Card --- */
+.centeredImageCard .moduleImage {
+  width: 90%;
+  margin: 1rem auto 0;
+  border-radius: 8px;
+  /* The aspect-ratio and object-fit from the default .moduleImage style will still apply */
 }
