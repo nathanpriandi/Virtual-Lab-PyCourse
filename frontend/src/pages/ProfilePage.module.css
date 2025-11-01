@@ -8,7 +8,7 @@
 }
 
 .profileContainer {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(10px);
   padding: 3rem;
   border-radius: 20px;
@@ -30,48 +30,65 @@
   }
 }
 
-.profileContainer::before {
-  content: '👤';
-  display: block;
-  font-size: 4rem;
-  margin-bottom: 1rem;
-  animation: bounce 2s infinite;
+.avatarWrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+.avatarWrapper:hover {
+  transform: scale(1.05);
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 5px solid white;
+  object-fit: cover;
+}
+
+.editAvatarButton {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: #4f46e5;
+  color: white;
+  border: 2px solid white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.avatarWrapper:hover .editAvatarButton {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .profileContainer h1 {
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-weight: 700;
-}
-
-.profileContainer h2 {
   margin-bottom: 0.5rem;
+  font-size: 2.25rem;
+  font-weight: 700;
   color: #1f2937;
-  font-size: 1.75rem;
-  font-weight: 600;
 }
 
 .profileContainer p {
   margin-bottom: 2.5rem;
   color: #6b7280;
   font-size: 1.1rem;
-  padding: 1rem;
-  background: #f3f4f6;
-  border-radius: 12px;
-  font-weight: 500;
 }
 
 .logoutButton {
@@ -92,21 +109,114 @@
   box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
 }
 
-.logoutButton:active {
-  transform: translateY(-1px);
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
 }
 
-@media (max-width: 768px) {
-  .profileContainer {
-    padding: 2rem;
-    max-width: 400px;
-  }
-  
-  .profileContainer h1 {
-    font-size: 1.75rem;
-  }
-  
-  .profileContainer h2 {
-    font-size: 1.5rem;
-  }
+.modalContent {
+  background: white;
+  padding: 2rem;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  animation: fadeInUp 0.4s ease;
+}
+
+.modalContent h2 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  color: #374151;
+}
+
+.avatarList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.avatarOption {
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 4px solid transparent;
+}
+
+.avatarOption:hover {
+  transform: scale(1.05);
+  border-color: #a5b4fc;
+}
+
+.avatarOption.selected {
+  border-color: #4f46e5;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(79, 70, 229, 0.6);
+}
+
+.avatarOption img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.modalActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.modalActions button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.closeModalButton {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.closeModalButton:hover {
+  background: #d1d5db;
+}
+
+.saveModalButton {
+  background: #4f46e5;
+  color: white;
+}
+
+.saveModalButton:hover {
+  background: #4338ca;
+}
+
+.saveModalButton:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.5rem;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
