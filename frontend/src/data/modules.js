@@ -96,7 +96,7 @@ export const modules = [
       
       <h3>Mendapatkan Tipe Data</h3>
       <p>Anda bisa mendapatkan tipe data dari variabel apa pun dengan menggunakan fungsi <code>type()</code>.</p>
-      <pre><code>x = 5\nprint(type(x))  # Output: <class 'int'>\n\ny = "Hello"\nprint(type(y))  # Output: <class 'str'>\n\nz = 1.5\nprint(type(z))  # Output: <class 'float'></code></pre>
+      <pre><code>x = 5\nprint(type(x))  # Output: &lt;class 'int'&gt;\n\ny = "Hello"\nprint(type(y))  # Output: &lt;class 'str'&gt;\n\nz = 1.5\nprint(type(z))  # Output: &lt;class 'float'&gt;</code></pre>
     `
   },
   {
