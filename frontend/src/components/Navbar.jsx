@@ -21,14 +21,21 @@ function Navbar() {
           });
           if (response.ok) {
             setUser(await response.json());
+          } else {
+            // Handle invalid/expired token
+            localStorage.removeItem('token');
+            setUser(null);
+            navigate('/auth', { replace: true }); // Force redirect
           }
         } catch (error) {
           console.error('Failed to fetch user for navbar', error);
+          localStorage.removeItem('token');
+          setUser(null);
         }
       };
       fetchUser();
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
