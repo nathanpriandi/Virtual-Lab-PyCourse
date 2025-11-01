@@ -25,6 +25,7 @@ function CodeEditor({ moduleId, initialCode }) {
   const [code, setCode] = useState(initialCode);
   const [output, setOutput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [isExecuting, setIsExecuting] = useState(false);
   const pyodideRef = useRef(null);
 
   const debouncedCode = useDebounce(code, 1500); // 1.5 second debounce delay
@@ -89,6 +90,7 @@ function CodeEditor({ moduleId, initialCode }) {
     const pyodide = pyodideRef.current;
     if (!pyodide) return;
 
+    setIsExecuting(true);
     try {
       setOutput('');
       await pyodide.runPythonAsync(code);
@@ -96,6 +98,8 @@ function CodeEditor({ moduleId, initialCode }) {
     } catch (error) {
       console.error(error);
       setOutput((prev) => prev + '\nError: ' + error.message);
+    } finally {
+      setIsExecuting(false);
     }
   };
 
@@ -107,8 +111,8 @@ function CodeEditor({ moduleId, initialCode }) {
     <div className={styles.editorContainer}>
       <div className={styles.editorHeader}>
         <span>Editor Kode (Python)</span>
-        <button onClick={runCode} disabled={isLoading} className={styles.runButton}>
-          {isLoading ? 'Loading...' : 'Run'}
+        <button onClick={runCode} disabled={isLoading || isExecuting} className={styles.runButton}>
+          {isLoading ? 'Memuat...' : isExecuting ? 'Menjalankan...' : 'Run'}
         </button>
       </div>
       
@@ -125,6 +129,7 @@ function CodeEditor({ moduleId, initialCode }) {
           indentOnInput: true,
           autocompletion: true,
         }}
+        readOnly={isLoading}
       />
       
       <div className={styles.outputArea}>
