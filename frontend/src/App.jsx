@@ -9,19 +9,20 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Auth page is the public entry point */}
         <Route path="/auth" element={<AuthPage />} />
+
+        {/* Root path is now protected and defaults to the HomePage */}
         <Route 
           path="/" 
-          element={<Navigate to="/home" replace />} 
-        />
-        <Route 
-          path="/home" 
           element={
             <ProtectedRoute>
               <HomePage />
             </ProtectedRoute>
-          } 
+          }
         />
+
+        {/* Other protected routes */}
         <Route 
           path="/module/:moduleId" 
           element={
@@ -38,7 +39,9 @@ function App() {
             </ProtectedRoute>
           } 
         />
-        <Route path="*" element={<Navigate to="/home" replace />} />
+
+        {/* Catch-all route redirects to the root, which is handled by ProtectedRoute */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
   );
