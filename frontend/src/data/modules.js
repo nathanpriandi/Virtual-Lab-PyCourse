@@ -1,7 +1,19 @@
+import variablesImage from '../assets/variables.jpg';
+import dataTypesImage from '../assets/data types.png';
+import numbersImage from '../assets/numbers.png';
+import castingImage from '../assets/casting.png';
+import booleanImage from '../assets/boolean.png';
+import operatorsImage from '../assets/operators.png';
+import conditionalsImage from '../assets/conditionals.jpg';
+import whileLoopImage from '../assets/while loop.jpg';
+import forLoopImage from '../assets/for loop.jpg';
+import functionsImage from '../assets/function.jpg';
+
 export const modules = [
-  { 
-    id: 'variables-syntax', 
+  {
+    id: 'variables-syntax',
     title: 'Variables & Syntax',
+    imageUrl: variablesImage,
     materi: `
       <h3>Memulai dengan Python</h3>
       <p>Python dikenal dengan sintaksnya yang sederhana dan mudah dibaca, mirip dengan bahasa Inggris. Python menggunakan indentasi (spasi di awal baris) untuk mendefinisikan blok kode, tidak seperti bahasa lain yang sering menggunakan kurung kurawal.</p>
@@ -26,9 +38,10 @@ print(nama)</code></pre>
 print("Hello, World!")</code></pre>
     `
   },
-  { 
-    id: 'data-types', 
+  {
+    id: 'data-types',
     title: 'Data Types',
+    imageUrl: dataTypesImage,
     materi: `
       <h3>Tipe Data Bawaan</h3>
       <p>Variabel dapat menyimpan data dari tipe yang berbeda, dan tipe yang berbeda dapat melakukan hal yang berbeda. Python memiliki tipe data bawaan berikut secara default:</p>
@@ -54,9 +67,10 @@ z = 1.5
 print(type(z))  # Output: <class 'float'></code></pre>
     `
   },
-  { 
-    id: 'numbers', 
+  {
+    id: 'numbers',
     title: 'Numbers',
+    imageUrl: numbersImage,
     materi: `
       <h3>Tipe Angka Python</h3>
       <p>Ada tiga tipe angka numerik dalam Python: <code>int</code>, <code>float</code>, dan <code>complex</code>.</p>
@@ -80,9 +94,10 @@ y = 5j
 z = -5j</code></pre>
     `
   },
-  { 
-    id: 'casting', 
+  {
+    id: 'casting',
     title: 'Casting',
+    imageUrl: castingImage,
     materi: `
       <h3>Apa itu Casting?</h3>
       <p>Terkadang, Anda mungkin perlu menentukan tipe data pada sebuah variabel. Ini dapat dilakukan dengan *casting*. Python adalah bahasa berorientasi objek, dan karenanya ia menggunakan fungsi konstruktor untuk melakukan casting:</p>
@@ -109,9 +124,10 @@ t = str(2)       # t akan menjadi '2'
 u = str(3.0)     # u akan menjadi '3.0'</code></pre>
     `
   },
-  { 
-    id: 'boolean', 
+  {
+    id: 'boolean',
     title: 'Boolean',
+    imageUrl: booleanImage,
     materi: `
       <h3>Nilai Boolean</h3>
       <p>Dalam pemrograman, Anda sering perlu tahu apakah suatu ekspresi itu <code>True</code> atau <code>False</code>. Anda dapat mengevaluasi ekspresi apa pun di Python, dan mendapatkan salah satu dari dua jawaban, <code>True</code> atau <code>False</code>.</p>
@@ -129,9 +145,10 @@ print(10 < 9)   # Output: False</code></pre>
       <p>Nilai-nilai berikut dievaluasi sebagai <code>False</code>: <code>False</code>, <code>None</code>, <code>0</code>, <code>""</code>, <code>()</code>, <code>[]</code>, <code>{}</code>.</p>
     `
   },
-  { 
-    id: 'operator', 
+  {
+    id: 'operator',
     title: 'Operator',
+    imageUrl: operatorsImage,
     materi: `
       <h3>Operator Python</h3>
       <p>Operator digunakan untuk melakukan operasi pada variabel dan nilai. Python membagi operator ke dalam beberapa grup:</p>
@@ -173,9 +190,10 @@ print(x // y) # Output: 3</code></pre>
       </ul>
     `
   },
-  { 
-    id: 'if-else', 
-    title: 'If Else',
+  {
+    id: 'if-else',
+    title: 'Conditionals',
+    imageUrl: conditionalsImage,
     materi: `
       <h3>Kondisi Python dan Pernyataan If</h3>
       <p>Python mendukung kondisi logika umum dari matematika:</p>
@@ -208,9 +226,10 @@ else:
       </ul>
     `
   },
-  { 
-    id: 'while-loop', 
+  {
+    id: 'while-loop',
     title: 'While Loop',
+    imageUrl: whileLoopImage,
     materi: `
       <h3>Python While Loop</h3>
       <p>Dengan *while loop*, kita dapat mengeksekusi satu set pernyataan selama kondisi bernilai benar (True).</p>
@@ -242,9 +261,10 @@ while i < 6:
   print(i) # Output: 1, 2, 4, 5, 6</code></pre>
     `
   },
-  { 
-    id: 'for-loop', 
+  {
+    id: 'for-loop',
     title: 'For Loop',
+    imageUrl: forLoopImage, 
     materi: `
       <h3>Python For Loop</h3>
       <p>Sebuah *for loop* digunakan untuk melakukan iterasi (perulangan) pada sebuah urutan (seperti <code>list</code>, <code>tuple</code>, <code>dict</code>, <code>set</code>, atau <code>string</code>).</p>
@@ -270,9 +290,10 @@ for x in range(6):
   print(x)</code></pre>
     `
   },
-  { 
-    id: 'functions', 
+  {
+    id: 'functions',
     title: 'Functions',
+    imageUrl: functionsImage,
     materi: `
       <h3>Apa itu Fungsi?</h3>
       <p>Fungsi adalah blok kode yang hanya berjalan ketika dipanggil. Anda dapat meneruskan data, yang dikenal sebagai parameter, ke dalam suatu fungsi. Sebuah fungsi dapat mengembalikan data sebagai hasilnya.</p>
@@ -304,9 +325,3 @@ print(kali_lima(10)) # Output: 50</code></pre>
     `
   },
 ];
-
-export const userProgress = {
-    name: 'User Tes',
-    profilePicture: 'https://via.placeholder.com/150',
-    completedModules: ['variables-syntax', 'data-types', 'numbers']
-}
