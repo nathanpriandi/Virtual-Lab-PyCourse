@@ -33,6 +33,10 @@ const UserSchema = new mongoose.Schema({
       quizScore: {
         type: Number,
       },
+      userCode: {
+        type: String,
+        default: null,
+      },
     },
   ],
 });
