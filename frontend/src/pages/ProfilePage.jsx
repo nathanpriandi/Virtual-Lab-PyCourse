@@ -58,23 +58,15 @@ function ProfilePage() {
   };
 
   const handleAvatarUpdate = async () => {
-    console.log('Button clicked!');
-    console.log('Selected avatar:', selectedAvatar);
-    console.log('Current user avatar:', user?.avatar);
-    
     if (!selectedAvatar || !user || selectedAvatar === user.avatar) {
-      console.log('Condition failed - not updating');
       return;
     }
 
     try {
       setApiError('');
       const token = localStorage.getItem('token');
-      
-      // Try PATCH method first (most RESTful for partial updates)
-      console.log('Attempting PATCH to /api/auth/me');
-      let response = await fetch(`${API_BASE_URL}/api/auth/me`, {
-        method: 'PATCH',
+      const response = await fetch(`${API_BASE_URL}/api/auth/me/avatar`, {
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'x-auth-token': token,
@@ -82,38 +74,15 @@ function ProfilePage() {
         body: JSON.stringify({ avatar: selectedAvatar }),
       });
 
-      // If PATCH doesn't work, try PUT
-      if (response.status === 404 || response.status === 405) {
-        console.log('PATCH failed, trying PUT to /api/auth/me');
-        response = await fetch(`${API_BASE_URL}/api/auth/me`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-auth-token': token,
-          },
-          body: JSON.stringify({ avatar: selectedAvatar }),
-        });
-      }
-
-      console.log('Response status:', response.status);
-
       if (response.ok) {
         const updatedUser = await response.json();
-        console.log('Avatar updated successfully:', updatedUser);
         setUser(updatedUser);
         setIsModalOpen(false);
       } else {
-        const contentType = response.headers.get('content-type');
-        let errorMsg = 'Gagal memperbarui avatar. Server error.';
-        if (contentType && contentType.indexOf('application/json') !== -1) {
-          const errorData = await response.json().catch(() => ({}));
-          errorMsg = errorData.msg || errorData.message || errorMsg;
-        } else {
-          const errorText = await response.text();
-          console.error('Error response:', errorText);
-        }
+        const errorData = await response.json().catch(() => ({}));
+        const errorMsg = errorData.msg || 'Gagal memperbarui avatar. Server error.';
         setApiError(errorMsg);
-        console.error('Failed to update avatar:', errorMsg);
+        console.error('Failed to update avatar:', errorData);
       }
     } catch (error) {
       setApiError('Gagal koneksi ke server. Periksa koneksi Anda.');
@@ -155,11 +124,7 @@ function ProfilePage() {
         <div className={styles.modalOverlay}>
           <div className={styles.modalContent}>
             <h2>Pilih Avatar Baru</h2>
-            {apiError && (
-              <p style={{ color: '#ef4444', textAlign: 'center', marginBottom: '1.5rem', fontWeight: '600' }}>
-                {apiError}
-              </p>
-            )}
+            {apiError && <p className={styles.modalError}>{apiError}</p>}
             <div className={styles.avatarList}>
               {avatarIdentifiers.map((avatarId) => (
                 <div
