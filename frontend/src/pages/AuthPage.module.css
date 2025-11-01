@@ -2,82 +2,145 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f0f2f5;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
 }
 
 .authContainer {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   text-align: center;
-  width: 400px;
+  width: 100%;
+  max-width: 440px;
+  animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .authContainer h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #667eea;
+  font-weight: 700;
 }
 
 .authContainer form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: 1.25rem;
+  margin-top: 2rem;
 }
 
 .authContainer input {
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 1rem;
+  border: 2px solid #e0e7ff;
+  border-radius: 12px;
   font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.authContainer input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+  transform: translateY(-2px);
 }
 
 .authContainer button[type="submit"] {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 0.75rem;
+  padding: 1rem;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  margin-top: 0.5rem;
 }
 
 .authContainer button[type="submit"]:hover {
-  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.authContainer button[type="submit"]:active {
+  transform: translateY(0);
 }
 
 .authContainer p {
-  margin-top: 1.5rem;
+  margin-top: 2rem;
+  color: #6b7280;
+  font-size: 0.95rem;
 }
 
 .authContainer p button {
   background: none;
   border: none;
-  color: #007bff;
+  color: #667eea;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 600;
   margin-left: 0.5rem;
+  transition: all 0.3s ease;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+}
+
+.authContainer p button:hover {
+  background: rgba(102, 126, 234, 0.1);
 }
 
 .errorMessage {
-  color: #dc3545;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  padding: 0.75rem 1.25rem;
+  color: #dc2626;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border: 2px solid #fecaca;
+  padding: 1rem;
   margin-bottom: 1rem;
-  border-radius: 0.25rem;
+  border-radius: 12px;
   font-size: 0.9rem;
   text-align: left;
+  animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
 }
 
 .successMessage {
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
-  padding: 0.75rem 1.25rem;
+  color: #16a34a;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 2px solid #bbf7d0;
+  padding: 1rem;
   margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
+  border-radius: 12px;
+  animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

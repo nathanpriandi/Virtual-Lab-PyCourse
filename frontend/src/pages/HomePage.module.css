@@ -1,17 +1,50 @@
 .moduleCard {
-  border-radius: 8px;
-  border: 1px solid #090A6D;
-  padding: 1rem;
+  border-radius: 12px;
+  border: 2px solid #e0e7ff;
+  padding: 1.5rem;
   margin: 1rem;
-  background-color: #fff;
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(12, 15, 151, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.moduleCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #0C0F97 0%, #4f46e5 100%);
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.moduleCard:hover::before {
+  transform: scaleY(1);
 }
 
 .moduleCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(12, 15, 151, 0.15);
+  border-color: #c7d2fe;
+}
+
+.moduleCard h4 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--navy-blue);
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.moduleCard:hover h4 {
+  color: #4f46e5;
 }
 
 .moduleLink {
@@ -23,28 +56,78 @@
   display: flex; 
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  padding: 2rem 1rem 1rem;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  border-radius: 16px;
+  margin: 1rem;
 }
 
 .headerContainer h1 {
-  margin: 0.5rem 1rem 0 1rem;
+  margin: 0;
   font-size: 2.5rem;
   color: var(--navy-blue);
-}
-
-.headerContainer h2 {
-  margin: 0.5rem 1rem 1rem 1rem;
-  font-size: 2.5rem;
-  color: var(--navy-blue);
+  font-weight: 700;
+  background: linear-gradient(135deg, #0C0F97 0%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .moduleCard.completed {
-  border-color: #28a745;
-  background-color: #f0fff0;
+  border-color: #86efac;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.15);
 }
 
-.checkmark {
-  color: #28a745;
-  font-weight: bold;
-  font-size: 1.2rem;
+.moduleCard.completed::before {
+  background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+}
+
+.completionBadge {
+  color: #166534; /* Darker green for better contrast */
+  font-weight: 600;
+  font-size: 0.8rem; /* Smaller font for a badge */
+  background: #dcfce7;
+  padding: 6px 12px; /* Padding for pill shape */
+  border-radius: 9999px; /* Pill shape */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.moduleList {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.introText {
+  padding: 0 1rem;
+  font-size: 1.1rem;
+  color: var(--gray-dark);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.sectionTitle {
+  padding: 0 1rem;
+  font-size: 1.75rem;
+  color: var(--navy-blue);
+  margin-bottom: 1rem;
+  font-weight: 700;
 }

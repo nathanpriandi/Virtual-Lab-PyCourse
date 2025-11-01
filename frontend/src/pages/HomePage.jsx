@@ -71,7 +71,7 @@ function HomePage() {
                   }`}
                 >
                   <h4>{module.title}</h4>
-                  {isCompleted && <span className={styles.checkmark}>✔</span>}
+                  {isCompleted && <span className={styles.completionBadge}>Completed</span>}
                 </div>
               </Link>
             );

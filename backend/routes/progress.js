@@ -42,7 +42,7 @@ router.post('/complete-module', auth, async (req, res) => {
     res.json(user.progress);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error');
+    res.status(500).send('erver errorS');
   }
 });
 

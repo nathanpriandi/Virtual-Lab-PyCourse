@@ -1,9 +1,0 @@
-https://virtual-lab-pycourse-production.up.railway.app/api/auth/register
-Request Method
-POST
-Status Code
-400 Bad Request
-Remote Address
-66.33.22.118:443
-Referrer Policy
-strict-origin-when-cross-origin
