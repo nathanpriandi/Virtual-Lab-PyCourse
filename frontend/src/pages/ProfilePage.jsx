@@ -1,15 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './ProfilePage.module.css';
 import API_BASE_URL from '../apiConfig';
-import { getAvatarUrl, avatarIdentifiers } from '../data/avatars';
+
+// --- Avatar Generation Logic ---
+const generateAvatarDataUri = (name) => {
+  const getInitials = (name) => {
+    const words = name.split(' ');
+    if (words.length > 1) {
+      return (words[0][0] + words[1][0]).toUpperCase();
+    }
+    return name.substring(0, 2).toUpperCase();
+  };
+
+  const getBackgroundColor = (name) => {
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const h = hash % 360;
+    return `hsl(${h}, 65%, 50%)`;
+  };
+
+  const initials = getInitials(name || '??');
+  const backgroundColor = getBackgroundColor(name || 'Default');
+
+  const svgString = `
+    <svg width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+      <rect width="100%" height="100%" fill="${backgroundColor}" />
+      <text x="50%" y="50%" font-family="'Arial', sans-serif" font-size="60" fill="#ffffff" text-anchor="middle" dy=".3em">
+        ${initials}
+      </text>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;base64,${btoa(svgString)}`;
+};
+
+const getAvatarSrc = (user) => {
+  if (user && user.avatar) {
+    return `${API_BASE_URL}/uploads/${user.avatar}`;
+  }
+  return generateAvatarDataUri(user ? user.username : '');
+};
+// --------------------------------
 
 function ProfilePage() {
   const [user, setUser] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedAvatar, setSelectedAvatar] = useState(null);
-  const [apiError, setApiError] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -20,27 +60,22 @@ function ProfilePage() {
           return;
         }
 
-        const url = `${API_BASE_URL}/api/auth/me`;
-        const response = await fetch(url, {
-          headers: {
-            'x-auth-token': token,
-          },
+        const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
+          headers: { 'x-auth-token': token },
         });
 
         if (response.ok) {
-          const userData = await response.json();
-          setUser(userData);
+          setUser(await response.json());
         } else {
           localStorage.removeItem('token');
           navigate('/auth');
         }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
+      } catch (err) {
+        console.error('Error fetching user data:', err);
         localStorage.removeItem('token');
         navigate('/auth');
       }
     };
-
     fetchUser();
   }, [navigate]);
 
@@ -49,44 +84,37 @@ function ProfilePage() {
     navigate('/auth');
   };
 
-  const openAvatarModal = () => {
-    if (user) {
-      setSelectedAvatar(user.avatar);
-      setApiError('');
-    }
-    setIsModalOpen(true);
+  const handleEditClick = () => {
+    fileInputRef.current.click();
   };
 
-  const handleAvatarUpdate = async () => {
-    if (!selectedAvatar || !user || selectedAvatar === user.avatar) {
-      return;
-    }
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    setError('');
+    const formData = new FormData();
+    formData.append('avatar', file);
 
     try {
-      setApiError('');
       const token = localStorage.getItem('token');
-      const response = await fetch(`${API_BASE_URL}/api/auth/me/avatar`, {
-        method: 'PUT',
+      const response = await fetch(`${API_BASE_URL}/api/auth/me/avatar/upload`, {
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'x-auth-token': token,
         },
-        body: JSON.stringify({ avatar: selectedAvatar }),
+        body: formData,
       });
 
       if (response.ok) {
-        const updatedUser = await response.json();
-        setUser(updatedUser);
-        setIsModalOpen(false);
+        setUser(await response.json());
       } else {
-        const errorData = await response.json().catch(() => ({}));
-        const errorMsg = errorData.msg || 'Gagal memperbarui avatar. Server error.';
-        setApiError(errorMsg);
-        console.error('Failed to update avatar:', errorData);
+        const errData = await response.json();
+        setError(errData.msg || 'Upload failed. Please try again.');
       }
-    } catch (error) {
-      setApiError('Gagal koneksi ke server. Periksa koneksi Anda.');
-      console.error('Error updating avatar:', error);
+    } catch (err) {
+      setError('Network error. Please check your connection.');
+      console.error('Upload error:', err);
     }
   };
 
@@ -95,68 +123,35 @@ function ProfilePage() {
   }
 
   return (
-    <>
-      <div className={styles.profilePage}>
-        <div className={styles.profileContainer}>
-          <div className={styles.avatarWrapper}>
-            <img
-              src={getAvatarUrl(user.avatar)}
-              alt="User Avatar"
-              className={styles.avatarImage}
-            />
-            <button
-              onClick={openAvatarModal}
-              className={styles.editAvatarButton}
-            >
-              Ganti
-            </button>
-          </div>
-
-          <h1>{user.username}</h1>
-          <p>{user.email}</p>
-          <button onClick={handleLogout} className={styles.logoutButton}>
-            Logout
+    <div className={styles.profilePage}>
+      <div className={styles.profileContainer}>
+        <div className={styles.avatarWrapper}>
+          <img
+            src={getAvatarSrc(user)}
+            alt="User Avatar"
+            className={styles.avatarImage}
+          />
+          <button onClick={handleEditClick} className={styles.editAvatarButton}>
+            Ganti
           </button>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            style={{ display: 'none' }}
+            accept="image/png, image/jpeg, image/gif"
+          />
         </div>
-      </div>
 
-      {isModalOpen && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modalContent}>
-            <h2>Pilih Avatar Baru</h2>
-            {apiError && <p className={styles.modalError}>{apiError}</p>}
-            <div className={styles.avatarList}>
-              {avatarIdentifiers.map((avatarId) => (
-                <div
-                  key={avatarId}
-                  className={`${styles.avatarOption} ${
-                    selectedAvatar === avatarId ? styles.selected : ''
-                  }`}
-                  onClick={() => setSelectedAvatar(avatarId)}
-                >
-                  <img src={getAvatarUrl(avatarId)} alt={`Avatar ${avatarId}`} />
-                </div>
-              ))}
-            </div>
-            <div className={styles.modalActions}>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className={styles.closeModalButton}
-              >
-                Batal
-              </button>
-              <button
-                onClick={handleAvatarUpdate}
-                className={styles.saveModalButton}
-                disabled={!selectedAvatar || selectedAvatar === user.avatar}
-              >
-                Simpan Perubahan
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+        {error && <p className={styles.errorText}>{error}</p>}
+
+        <h1>{user.username}</h1>
+        <p>{user.email}</p>
+        <button onClick={handleLogout} className={styles.logoutButton}>
+          Logout
+        </button>
+      </div>
+    </div>
   );
 }
 
