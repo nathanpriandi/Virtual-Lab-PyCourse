@@ -44,3 +44,5 @@ export const getAvatarSrc = (user) => {
   }
   return generateAvatarDataUri(user ? user.username : '');
 };
+
+export { generateAvatarDataUri };

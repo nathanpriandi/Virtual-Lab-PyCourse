@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Navbar.module.css';
 import logoImage from '../assets/pycourse-logo.png';
-import { getAvatarSrc } from '../utils/avatar';
+import { getAvatarSrc, generateAvatarDataUri } from '../utils/avatar';
 import API_BASE_URL from '../apiConfig';
 
 function Navbar() {
@@ -61,6 +61,7 @@ function Navbar() {
               alt="User Avatar"
               className={styles.navbarAvatar}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              onError={(e) => { e.target.onerror = null; e.target.src = generateAvatarDataUri(user.username); }}
             />
             {isDropdownOpen && (
               <div className={styles.dropdownMenu}>

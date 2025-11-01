@@ -14,6 +14,38 @@ export const modules = [
     id: 'variables-syntax',
     title: 'Variables & Syntax',
     imageUrl: variablesImage,
+    quiz: {
+      title: 'Variables & Syntax Quiz',
+      questions: [
+        {
+          question: "Manakah dari berikut ini yang merupakan nama variabel yang valid di Python?",
+          options: [
+            "1variable",
+            "variable-name",
+            "_variable_name",
+            "variable name"
+          ],
+        },
+        {
+          question: "Bagaimana cara menulis komentar satu baris di Python?",
+          options: [
+            "// Ini komentar",
+            "/* Ini komentar */",
+            "# Ini komentar",
+            "<!-- Ini komentar -->"
+          ],
+        },
+        {
+          question: "Tipe data untuk menyimpan teks dalam Python adalah...",
+          options: [
+            "char",
+            "string",
+            "txt",
+            "str"
+          ],
+        }
+      ]
+    },
     materi: `
       <h3>Memulai dengan Python</h3>
       <p>Python dikenal dengan sintaksnya yang sederhana dan mudah dibaca, mirip dengan bahasa Inggris. Python menggunakan indentasi (spasi di awal baris) untuk mendefinisikan blok kode, tidak seperti bahasa lain yang sering menggunakan kurung kurawal.</p>
