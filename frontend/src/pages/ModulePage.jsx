@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { modules } from '../data/modules';
 import Navbar from '../components/Navbar';
 import CodeEditor from '../components/CodeEditor';
-import Quiz from '../components/Quiz'; // Import the new Quiz component
+import Quiz from '../components/Quiz';
 import styles from './ModulePage.module.css';
 import API_BASE_URL from '../apiConfig';
 
@@ -11,34 +11,58 @@ function ModulePage() {
   const { moduleId } = useParams();
   const [view, setView] = useState('materi'); // 'materi', 'quiz', 'result'
   const [quizResult, setQuizResult] = useState(null);
+  const [initialCode, setInitialCode] = useState(null); // To hold the code for the editor
 
   const module = modules.find((m) => m.id === moduleId);
 
   useEffect(() => {
-    // When the module changes, reset the view to materi
+    // Reset views and code when module changes
     setView('materi');
     setQuizResult(null);
+    setInitialCode(null);
 
-    const markModuleAsViewed = async () => {
+    const setupModule = async () => {
       const token = localStorage.getItem('token');
-      if (token) {
-        try {
-          await fetch(`${API_BASE_URL}/api/progress/complete-module`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'x-auth-token': token,
-            },
-            body: JSON.stringify({ moduleId }),
-          });
-        } catch (error) {
-          console.error('Error marking module as viewed:', error);
+      if (!token) {
+        // If no token, use default code and skip API calls
+        setInitialCode(module?.defaultCode || "# Silakan login untuk menyimpan kodemu\nprint('Hello, World!')");
+        return;
+      }
+
+      try {
+        // Ensure progress entry exists. This also marks the module as started.
+        await fetch(`${API_BASE_URL}/api/progress/complete-module`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
+          body: JSON.stringify({ moduleId }),
+        });
+
+        // Fetch full user data to get saved code
+        const userRes = await fetch(`${API_BASE_URL}/api/auth/me`, {
+          headers: { 'x-auth-token': token },
+        });
+
+        if (userRes.ok) {
+          const userData = await userRes.json();
+          const progress = userData.progress.find(p => p.moduleId === moduleId);
+          
+          // Use saved code, or module default code, or a final fallback
+          const savedCode = progress?.userCode;
+          const defaultCode = module?.defaultCode || "# Tulis kodemu di sini\nprint('Hello, World!')";
+          
+          setInitialCode(savedCode ?? defaultCode);
+        } else {
+          // If fetching user fails, use default code
+          setInitialCode(module?.defaultCode || "# Gagal memuat kode tersimpan\nprint('Hello, World!')");
         }
+      } catch (error) {
+        console.error('Error setting up module:', error);
+        setInitialCode(module?.defaultCode || "# Gagal memuat kode tersimpan\nprint('Hello, World!')");
       }
     };
 
-    markModuleAsViewed();
-  }, [moduleId]);
+    setupModule();
+  }, [moduleId, module]);
 
   const handleQuizComplete = async (answers) => {
     try {
@@ -58,7 +82,6 @@ function ModulePage() {
         setView('result');
       } else {
         console.error('Failed to submit quiz');
-        // Optionally, show an error to the user
       }
     } catch (error) {
       console.error('Error submitting quiz:', error);
@@ -88,6 +111,7 @@ function ModulePage() {
             <h2>Hasil Kuis</h2>
             <p className={styles.scoreText}>Skor Anda:</p>
             <p className={styles.scoreValue}>{quizResult.score}%</p>
+            {quizResult.score === 100 && <p className={styles.congratsMessage}>Kerja bagus! Modul ini telah ditandai selesai.</p>}
             <button onClick={() => setView('materi')} className={styles.primaryButton}>
               Kembali ke Materi
             </button>
@@ -122,7 +146,14 @@ function ModulePage() {
         </div>
 
         <div className={styles.editorSide}>
-          <CodeEditor />
+          {initialCode !== null ? (
+            <CodeEditor 
+              moduleId={moduleId}
+              initialCode={initialCode} 
+            />
+          ) : (
+            <div className={styles.editorLoading}>Loading Editor...</div>
+          )}
         </div>
       </div>
     </div>

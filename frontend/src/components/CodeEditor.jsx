@@ -1,19 +1,62 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styles from './CodeEditor.module.css';
 import { loadPyodide } from 'pyodide';
 import CodeMirror from '@uiw/react-codemirror';
 import { python } from '@codemirror/lang-python';
-import { vscodeDark, vscodeLight } from '@uiw/codemirror-theme-vscode';
+import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { EditorView } from '@codemirror/view';
+import API_BASE_URL from '../apiConfig';
 
-function CodeEditor() {
-  const [code, setCode] = useState("print('Hello, World!')"); 
+// Debounce hook
+const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+  return debouncedValue;
+};
+
+function CodeEditor({ moduleId, initialCode }) {
+  const [code, setCode] = useState(initialCode);
   const [output, setOutput] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const pyodideRef = useRef(null);
 
-  console.log('CodeEditor render - isLoading:', isLoading);
+  const debouncedCode = useDebounce(code, 1500); // 1.5 second debounce delay
 
+  // Effect to auto-save the debounced code
+  useEffect(() => {
+    const saveCode = async () => {
+      const token = localStorage.getItem('token');
+      if (!token || debouncedCode === initialCode) {
+        // Don't save if user is not logged in or code hasn't changed from initial
+        return;
+      }
+
+      try {
+        await fetch(`${API_BASE_URL}/api/progress/save-code`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-auth-token': token,
+          },
+          body: JSON.stringify({ moduleId, code: debouncedCode }),
+        });
+        // console.log('Code saved'); // Optional: for debugging
+      } catch (error) {
+        console.error('Failed to save code:', error);
+      }
+    };
+
+    saveCode();
+  }, [debouncedCode, moduleId, initialCode]);
+
+  // Effect to load Pyodide
   useEffect(() => {
     async function setupPyodide() {
       try {
@@ -23,71 +66,57 @@ function CodeEditor() {
         });
         pyodideRef.current = pyodide;
         
-        pyodide.setStdout({
-          batched: (text) => {
-            setOutput((prevOutput) => prevOutput + text);
-          }
-        });
-        
-        pyodide.setStderr({
-          batched: (text) => {
-            setOutput((prevOutput) => prevOutput + text);
-          }
-        });
+        pyodide.setStdout({ batched: (text) => setOutput((prev) => prev + text) });
+        pyodide.setStderr({ batched: (text) => setOutput((prev) => prev + text) });
         
         setOutput('Interpreter siap.\n');
-        console.log('Setting isLoading to false');
         setIsLoading(false);
-
       } catch (error) {
         console.error("Gagal memuat Pyodide:", error);
         setOutput(`Gagal memuat interpreter: ${error.message}\n`);
         setIsLoading(false);
       }
     }
-
     setupPyodide();
   }, []);
+
+  // Reset code when the initialCode prop changes (i.e., when navigating to a new module)
+  useEffect(() => {
+    setCode(initialCode);
+  }, [initialCode]);
   
   const runCode = async () => {
     const pyodide = pyodideRef.current;
-
-    if (!pyodide) {
-      setOutput("Pyodide belum siap.");
-      return;
-    }
+    if (!pyodide) return;
 
     try {
       setOutput('');
-      
       await pyodide.runPythonAsync(code);
-      
       setOutput((prev) => prev || 'Kode dijalankan tanpa output.\n');
-
     } catch (error) {
       console.error(error);
       setOutput((prev) => prev + '\nError: ' + error.message);
     }
   };
 
+  const onCodeChange = useCallback((value) => {
+    setCode(value);
+  }, []);
+
   return (
     <div className={styles.editorContainer}>
       <div className={styles.editorHeader}>
         <span>Editor Kode (Python)</span>
-        <button 
-          onClick={runCode} 
-          disabled={isLoading}
-          className={styles.runButton}
-        >
+        <button onClick={runCode} disabled={isLoading} className={styles.runButton}>
           {isLoading ? 'Loading...' : 'Run'}
         </button>
       </div>
       
       <CodeMirror
         value={code}
-        onChange={(value) => setCode(value)}
+        onChange={onCodeChange}
         className={styles.editorWrapper}
-        theme={vscodeLight}
+        theme={vscodeDark} // Changed to dark theme to match output
         height='100%'
         extensions={[python(), EditorView.lineWrapping]}
         basicSetup={{

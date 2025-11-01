@@ -14,6 +14,7 @@ export const modules = [
     id: 'variables-syntax',
     title: 'Variables & Syntax',
     imageUrl: variablesImage,
+    defaultCode: '# Selamat datang di modul Variabel & Sintaks!\n# Coba jalankan kode di bawah ini atau tulis kodemu sendiri.\n\nx = 10\nnama = "PyCourse"\n\nprint("Halo, " + nama + "!")\nprint("Nilai x adalah:", x)\n',
     quiz: {
       title: 'Variables & Syntax Quiz',
       questions: [
