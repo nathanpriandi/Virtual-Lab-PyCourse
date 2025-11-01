@@ -18,7 +18,7 @@ const UserSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    default: 'set1_1', // Default avatar identifier
+    default: null,
   },
   progress: [
     {
