@@ -156,10 +156,29 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 0;
+  padding: 0.85rem 0;
   font-size: 1rem;
   color: #374151;
   border-bottom: 1px solid #f3f4f6;
+}
+
+.moduleTitle {
+  font-weight: 500;
+}
+
+.moduleStatusAndScore {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quizScore {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4f46e5;
+  background-color: #eef2ff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
 }
 
 .moduleStatusItem:last-child {

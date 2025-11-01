@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styles from './ProfilePage.module.css';
 import API_BASE_URL from '../apiConfig';
-import { getAvatarSrc } from '../utils/avatar';
+import { getAvatarSrc, generateAvatarDataUri } from '../utils/avatar';
 import { modules } from '../data/modules';
 
 function ProfilePage() {
@@ -126,6 +126,7 @@ function ProfilePage() {
             src={getAvatarSrc(user)}
             alt="User Avatar"
             className={styles.avatarImage}
+            onError={(e) => { e.target.onerror = null; e.target.src = generateAvatarDataUri(user.username); }}
           />
           <input
             type="file"
@@ -157,12 +158,22 @@ function ProfilePage() {
           </button>
           {isProgressExpanded && (
             <div className={styles.moduleStatusList}>
-              {modules.map(module => (
-                <div key={module.id} className={styles.moduleStatusItem}>
-                  <span>{module.title}</span>
-                  <span className={progressStats.completedIds.has(module.id) ? styles.completedCheck : styles.incompleteCheck}></span>
-                </div>
-              ))}
+              {modules.map(module => {
+                const isCompleted = progressStats.completedIds.has(module.id);
+                const moduleProgress = user.progress.find(p => p.moduleId === module.id);
+
+                return (
+                  <div key={module.id} className={styles.moduleStatusItem}>
+                    <span className={styles.moduleTitle}>{module.title}</span>
+                    <div className={styles.moduleStatusAndScore}>
+                      {moduleProgress && moduleProgress.quizScore !== undefined && (
+                        <span className={styles.quizScore}>Skor: {moduleProgress.quizScore}%</span>
+                      )}
+                      <span className={isCompleted ? styles.completedCheck : styles.incompleteCheck}></span>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>

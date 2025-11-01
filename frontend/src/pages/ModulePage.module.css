@@ -178,3 +178,60 @@
     min-height: 50vh;
   }
 }
+
+/* --- Quiz Integration Styles --- */
+.startQuizContainer {
+  margin-top: 3rem;
+  padding: 2rem;
+  text-align: center;
+  background-color: #f0f4ff;
+  border-radius: 16px;
+  border: 2px dashed #c7d2fe;
+}
+
+.startQuizContainer h3 {
+  font-size: 1.75rem;
+  color: var(--navy-blue);
+  margin-top: 0;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #0C0F97 0%, #4f46e5 100%);
+  color: white;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+}
+
+.primaryButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+}
+
+.resultContainer {
+  text-align: center;
+  padding: 4rem 2rem;
+  animation: fadeIn 0.5s ease;
+}
+
+.resultContainer h2 {
+  font-size: 2.5rem;
+}
+
+.scoreText {
+  font-size: 1.2rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.scoreValue {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #4f46e5;
+  margin: 0 0 2rem;
+}
