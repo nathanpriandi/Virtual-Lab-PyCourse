@@ -79,21 +79,26 @@ router.post('/submit-quiz', auth, async (req, res) => {
 
     if (progressIndex > -1) {
       user.progress[progressIndex].quizScore = percentageScore;
-      // Only mark as completed if the score is 100%
       if (percentageScore === 100) {
-        user.progress[progressIndex].completed = true; 
+        user.progress[progressIndex].completed = true;
       }
     } else {
-      // This case might happen if /complete-module was never called, create progress entry
       user.progress.push({ 
         moduleId, 
-        completed: percentageScore === 100, // Set completion based on score
+        completed: percentageScore === 100,
         quizScore: percentageScore 
       });
     }
 
     await user.save();
 
+    res.json({
+      score: percentageScore,
+      progress: user.progress
+    });
+
+  } catch (err) {
+    console.error(err.message);
     res.status(500).send('Server error');
   }
 });

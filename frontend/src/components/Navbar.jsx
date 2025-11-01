@@ -11,10 +11,11 @@ function Navbar() {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
+  // Effect to check token and fetch user on mount
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const fetchUser = async () => {
+    const validateUser = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
         try {
           const response = await fetch(`${API_BASE_URL}/api/auth/me`, {
             headers: { 'x-auth-token': token },
@@ -22,21 +23,36 @@ function Navbar() {
           if (response.ok) {
             setUser(await response.json());
           } else {
-            // Handle invalid/expired token
+            // Invalid token found, clear it and redirect
             localStorage.removeItem('token');
             setUser(null);
-            navigate('/auth', { replace: true }); // Force redirect
+            navigate('/auth', { replace: true });
           }
         } catch (error) {
           console.error('Failed to fetch user for navbar', error);
           localStorage.removeItem('token');
           setUser(null);
         }
-      };
-      fetchUser();
-    }
+      }
+    };
+    validateUser();
   }, [navigate]);
 
+  // Effect to listen for storage changes (logout from other tabs)
+  useEffect(() => {
+    const handleStorageChange = (e) => {
+      if (e.key === 'token' && e.newValue === null) {
+        setUser(null);
+        navigate('/auth', { replace: true });
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [navigate]);
+
+  // Effect to close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
