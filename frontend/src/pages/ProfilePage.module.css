@@ -2,43 +2,111 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f0f2f5;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
 }
 
 .profileContainer {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   text-align: center;
-  width: 400px;
+  width: 100%;
+  max-width: 500px;
+  animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profileContainer::before {
+  content: '👤';
+  display: block;
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .profileContainer h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
 }
 
 .profileContainer h2 {
   margin-bottom: 0.5rem;
+  color: #1f2937;
+  font-size: 1.75rem;
+  font-weight: 600;
 }
 
 .profileContainer p {
-  margin-bottom: 1.5rem;
-  color: #555;
+  margin-bottom: 2.5rem;
+  color: #6b7280;
+  font-size: 1.1rem;
+  padding: 1rem;
+  background: #f3f4f6;
+  border-radius: 12px;
+  font-weight: 500;
 }
 
 .logoutButton {
-  background-color: #dc3545;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: white;
-  padding: 0.75rem 1.5rem;
+  padding: 1rem 2.5rem;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
 }
 
 .logoutButton:hover {
-  background-color: #c82333;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+}
+
+.logoutButton:active {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .profileContainer {
+    padding: 2rem;
+    max-width: 400px;
+  }
+  
+  .profileContainer h1 {
+    font-size: 1.75rem;
+  }
+  
+  .profileContainer h2 {
+    font-size: 1.5rem;
+  }
 }

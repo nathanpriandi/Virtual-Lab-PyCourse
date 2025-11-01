@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background: #f8fafc;
 }
 
 .moduleLayout {
@@ -13,14 +14,28 @@
 .materiSide {
   flex-basis: 60%;
   flex-shrink: 0;
-  padding: 1.5rem;
+  padding: 2rem;
   overflow-y: auto;
-  background-color: var(--white-primary);
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
   box-sizing: border-box;
 }
 
 .materiSide::-webkit-scrollbar {
-  display: none;
+  width: 8px;
+}
+
+.materiSide::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.materiSide::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0C0F97 0%, #4f46e5 100%);
+  border-radius: 10px;
+}
+
+.materiSide::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #4f46e5 0%, #0C0F97 100%);
 }
 
 .editorSide {
@@ -31,60 +46,135 @@
 
 .materiSide h2 {
   font-family: 'Lato', sans-serif;
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: var(--navy-blue);
+  background: linear-gradient(135deg, #0C0F97 0%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-top: 0;
-  margin-bottom: 1rem;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid #e0e7ff;
+  position: relative;
+}
+
+.materiSide h2::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, #0C0F97 0%, #4f46e5 100%);
 }
 
 .materiSide h3 {
   font-family: 'Lato', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: var(--black-primary);
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
+  color: var(--navy-blue);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+  border-left: 4px solid #0C0F97;
+  border-radius: 8px;
 }
 
 .materiSide p, .materiSide ul, .materiSide li {
   font-family: 'Lato', sans-serif;
-  font-size: 1rem;
-  line-height: 1.6; 
+  font-size: 1.1rem;
+  line-height: 1.8; 
   color: var(--gray-dark);
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
 }
 
 .materiSide ul {
   padding-left: 2rem;
+  list-style: none;
 }
 
-.materiSide code {
-  font-family: 'Courier New', Courier, monospace;
-  background-color: #f4f4f4;
-  color: var(--navy-blue);
-  padding: 2px 5px;
-  border-radius: 4px;
-  font-size: 0.9rem;
+.materiSide li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
 }
+
+.materiSide li::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: #0C0F97;
+  font-weight: bold;
+}
+
+
 
 .materiSide pre {
   font-family: 'Courier New', Courier, monospace;
-  background-color: var(--black-primary);
-  color: #f8f8f2; 
-  padding: 1rem;
-  border-radius: 8px;
+  background: #1a1d2e !important;
+  color: #f8f8f2 !important; 
+  padding: 1.5rem;
+  border-radius: 12px;
   overflow-x: auto; 
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 2px solid #2d3548;
+  position: relative;
+}
+
+.materiSide pre::before {
+  content: 'Python';
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  color: #6b7280;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
 }
 
 .materiSide pre code {
-  background-color: transparent;
-  color: inherit;
+  /* FIX: Ensure high contrast for code text inside the dark <pre> block */
+  background-color: transparent !important;
+  color: #f8f8f2 !important; /* Light color for readability on dark background */
   padding: 0;
   border-radius: 0;
   font-size: inherit;
+  border: none;
+}
+
+.materiSide pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+.materiSide pre::-webkit-scrollbar-track {
+  background: #2d3548;
+  border-radius: 10px;
+}
+
+.materiSide pre::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 10px;
+}
+
+.materiSide pre::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+@media (max-width: 1024px) {
+  .moduleLayout {
+    flex-direction: column;
+  }
+  
+  .materiSide, .editorSide {
+    flex-basis: 100%;
+    min-height: 50vh;
+  }
 }
