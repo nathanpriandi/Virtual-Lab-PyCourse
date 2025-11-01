@@ -98,4 +98,32 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
+// @route   PUT api/auth/me/avatar
+// @desc    Update user avatar
+// @access  Private
+router.put('/me/avatar', auth, async (req, res) => {
+  const { avatar } = req.body;
+
+  if (!avatar) {
+    return res.status(400).json({ msg: 'Avatar identifier is required' });
+  }
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { $set: { avatar: avatar } },
+      { new: true } // Return the updated document
+    ).select('-password'); // Exclude password from the result
+
+    if (!updatedUser) {
+      return res.status(404).json({ msg: 'User not found' });
+    }
+
+    res.json(updatedUser);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
 module.exports = router;
