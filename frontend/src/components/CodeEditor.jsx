@@ -67,9 +67,14 @@ function CodeEditor({ moduleId, initialCode }) {
         });
         pyodideRef.current = pyodide;
         
-        pyodide.setStdout({ batched: (text) => setOutput((prev) => prev + text.replace(/\r/g, '')) });
-        pyodide.setStderr({ batched: (text) => setOutput((prev) => prev + text.replace(/\r/g, '')) });
-        
+        const handleOutput = (text) => {
+          const normalizedText = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+          setOutput((prev) => prev + normalizedText + '\n');
+        };
+
+        pyodide.setStdout({ batched: handleOutput });
+        pyodide.setStderr({ batched: handleOutput });
+
         setOutput('Interpreter siap.\n');
         setIsLoading(false);
       } catch (error) {
