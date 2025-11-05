@@ -7,7 +7,7 @@
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* More subtle shadow */
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Changed to visible to allow badge to overflow */
 }
 
 .moduleCard::before {
@@ -38,6 +38,32 @@
   aspect-ratio: 16 / 9; /* Modern 16:9 aspect ratio */
   object-fit: cover;
   border-bottom: 1px solid #e2e8f0;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+.moduleNumber {
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #0C0F97 0%, #4f46e5 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 12px rgba(12, 15, 151, 0.3);
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.moduleCard:hover .moduleNumber {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 6px 16px rgba(12, 15, 151, 0.4);
 }
 
 .cardContent {
@@ -63,14 +89,14 @@
 .moduleLink {
   text-decoration: none; 
   color: inherit; 
+  width: 18%;
 }
 
 .headerContainer {
   display: flex; 
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
-  padding: 2rem 1rem 1rem;
+  padding: 1.5rem 1rem;
   background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
   border-radius: 16px;
   margin: 1rem;
@@ -124,11 +150,11 @@
 }
 
 .moduleList {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem; /* Increased gap for separation */
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 0 auto 2rem auto; /* Added margin-bottom */
+  flex-wrap: wrap;
 }
 
 .introText {

@@ -92,10 +92,10 @@ function ModulePage() {
     return (
       <div>
         <Navbar />
-        <main style={{ padding: '2rem' }}>
+        <main style={{ padding: '2rem' }} className={styles.notFoundContainer}>
           <h2>Modul Tidak Ditemukan</h2>
           <p>Modul yang Anda cari tidak ada.</p>
-          <Link to="/">Kembali ke Home</Link>
+          <Link to="/">Kembali ke Modul</Link>
         </main>
       </div>
     );
@@ -139,22 +139,34 @@ function ModulePage() {
   return (
     <div className={styles.pageContainer}>
       <Navbar />
-      <div className={styles.moduleLayout}>
+      {view !== 'quiz' && view !== 'result' && (
+        <div className={styles.homeButtonContainer}>
+          <Link to="/" className={styles.homeButton}>Kembali ke Home</Link>
+        </div>
+      )}
+      <div className={`${styles.moduleLayout} ${view === 'quiz' || view === 'result' ? styles.quizView : ''}`}>
         <div className={styles.materiSide}>
-          <h2>{module.title}</h2>
+          {view !== 'materi' && (
+            <button onClick={() => setView('materi')} className={styles.backButton}>
+              Kembali ke Modul
+            </button>
+          )}
+          {view !== 'quiz' && <h2>{module.title}</h2>}
           {renderContent()}
         </div>
 
-        <div className={styles.editorSide}>
-          {initialCode !== null ? (
-            <CodeEditor 
-              moduleId={moduleId}
-              initialCode={initialCode} 
-            />
-          ) : (
-            <div className={styles.editorLoading}>Loading Editor...</div>
-          )}
-        </div>
+        {view !== 'quiz' && (
+          <div className={styles.editorSide}>
+            {initialCode !== null ? (
+              <CodeEditor 
+                moduleId={moduleId}
+                initialCode={initialCode} 
+              />
+            ) : (
+              <div className={styles.editorLoading}>Loading Editor...</div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

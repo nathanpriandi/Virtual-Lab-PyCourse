@@ -63,11 +63,11 @@ function Quiz({ quizData, onQuizComplete }) {
 
       <div className={styles.navigationButtons}>
         <button onClick={handleBack} disabled={currentQuestionIndex === 0}>
-          &larr; Kembali
+          Kembali
         </button>
         {currentQuestionIndex < quizData.questions.length - 1 ? (
           <button onClick={handleNext}>
-            Selanjutnya &rarr;
+            Selanjutnya
           </button>
         ) : (
           <button onClick={handleSubmit} disabled={!isAllAnswered || isSubmitting}>

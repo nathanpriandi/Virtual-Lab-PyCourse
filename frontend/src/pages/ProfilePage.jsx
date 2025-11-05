@@ -119,7 +119,7 @@ function ProfilePage() {
 
   return (
     <div className={styles.profilePage}>
-      <Link to="/" className={styles.backButton}>&larr; Kembali ke Home</Link>
+      <Link to="/" className={styles.backButton}>Kembali ke Home</Link>
       <div className={styles.profileContainer}>
         <div className={styles.avatarWrapper}>
           <img
