@@ -32,6 +32,9 @@ function HomePage() {
     fetchUserData();
   }, []);
 
+  const topRowModules = modules.slice(0, 5);
+  const bottomRowModules = modules.slice(5, 10);
+
   return (
     <div>
       <Navbar />
@@ -57,7 +60,7 @@ function HomePage() {
         </p>
         <h3 style={{ padding: '0 0 0 1rem' }}>Daftar Modul</h3>
         <div className={styles.moduleList}>
-          {modules.map((module) => {
+          {topRowModules.map((module, index) => {
             const isCompleted = completedModules.includes(module.id);
             return (
               <Link
@@ -68,6 +71,30 @@ function HomePage() {
                 <div
                   className={`${styles.moduleCard} ${isCompleted ? styles.completed : ''} ${module.id === 'variables-syntax' ? styles.centeredImageCard : ''}`}
                 >
+                  <div className={styles.moduleNumber}>{index + 1}</div>
+                  <img src={module.imageUrl} alt={module.title} className={styles.moduleImage} />
+                  <div className={styles.cardContent}>
+                    <h4>{module.title}</h4>
+                    {isCompleted && <span className={styles.completionBadge}>Completed</span>}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+        <div className={styles.moduleList}>
+          {bottomRowModules.map((module, index) => {
+            const isCompleted = completedModules.includes(module.id);
+            return (
+              <Link
+                key={module.id}
+                to={`/module/${module.id}`}
+                className={styles.moduleLink}
+              >
+                <div
+                  className={`${styles.moduleCard} ${isCompleted ? styles.completed : ''} ${module.id === 'variables-syntax' ? styles.centeredImageCard : ''}`}
+                >
+                  <div className={styles.moduleNumber}>{index + 6}</div>
                   <img src={module.imageUrl} alt={module.title} className={styles.moduleImage} />
                   <div className={styles.cardContent}>
                     <h4>{module.title}</h4>

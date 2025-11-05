@@ -3,6 +3,50 @@
   flex-direction: column;
   height: 100vh;
   background: #f8fafc;
+  position: relative;
+}
+
+.backButton {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+  color: #4b5563;
+  background-color: #f3f4f6;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  background-color: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+.homeButtonContainer {
+  padding: 0 2rem; /* Match materiSide padding */
+}
+
+.homeButton {
+  display: inline-block;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+  color: #4b5563;
+  background-color: #f3f4f6;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.homeButton:hover {
+  background-color: #e5e7eb;
+  transform: translateY(-2px);
 }
 
 .moduleLayout {
@@ -13,7 +57,6 @@
 
 .materiSide {
   flex-basis: 60%;
-  flex-shrink: 0;
   padding: 2rem;
   overflow-y: auto;
   background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
@@ -40,7 +83,6 @@
 
 .editorSide {
   flex-basis: 40%;
-  flex-shrink: 0;
   height: 100%;
 }
 
@@ -214,6 +256,11 @@
 }
 
 .resultContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   text-align: center;
   padding: 4rem 2rem;
   animation: fadeIn 0.5s ease;
@@ -234,4 +281,38 @@
   font-weight: 700;
   color: #4f46e5;
   margin: 0 0 2rem;
+}
+
+.notFoundContainer a {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #0C0F97 0%, #4f46e5 100%);
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+}
+
+.notFoundContainer a:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+  background: linear-gradient(135deg, #1e1fa0 0%, #5b52e8 100%);
+}
+
+.notFoundContainer a:active {
+  transform: translateY(-1px);
+}
+
+.quizView .materiSide {
+  flex-basis: 100%;
+  padding: 2rem 4rem; /* More horizontal padding for a centered feel */
+}
+
+.quizView .editorSide {
+  display: none;
 }
