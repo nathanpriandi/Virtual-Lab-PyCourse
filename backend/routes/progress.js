@@ -82,8 +82,13 @@ router.post('/submit-quiz', auth, async (req, res) => {
     const progressIndex = user.progress.findIndex(p => p.moduleId === moduleId);
 
     if (progressIndex > -1) {
-      user.progress[progressIndex].quizScore = percentageScore;
-      if (percentageScore === 100) {
+      const existingScore = user.progress[progressIndex].quizScore || 0;
+      // Only update score if the new one is higher
+      if (percentageScore > existingScore) {
+        user.progress[progressIndex].quizScore = percentageScore;
+      }
+      // Mark as completed if they ever get 100, regardless of it being the highest score
+      if (user.progress[progressIndex].quizScore === 100) {
         user.progress[progressIndex].completed = true;
       }
     } else {
