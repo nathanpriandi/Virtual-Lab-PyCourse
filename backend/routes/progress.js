@@ -1,7 +1,7 @@
 const express = require('express');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
-const quizzes = require('../data/quizzes'); // Import quiz data
+const quizzes = require('../data/quizzes');
 
 const router = express.Router();
 
@@ -32,7 +32,6 @@ router.post('/complete-module', auth, async (req, res) => {
 
     const existingProgress = user.progress.find(p => p.moduleId === moduleId);
 
-    // Only create a progress entry if it doesn't exist
     if (!existingProgress) {
       user.progress.push({ moduleId, completed: false });
       await user.save();
@@ -45,9 +44,6 @@ router.post('/complete-module', auth, async (req, res) => {
   }
 });
 
-// @route   POST api/progress/submit-quiz
-// @desc    Submit quiz answers and save score
-// @access  Private
 router.post('/submit-quiz', auth, async (req, res) => {
   const { moduleId, answers } = req.body;
   const quiz = quizzes[moduleId];
@@ -62,7 +58,7 @@ router.post('/submit-quiz', auth, async (req, res) => {
 
   try {
     let score = 0;
-    const detailedResults = []; // To hold the correctness of each answer
+    const detailedResults = [];
 
     quiz.questions.forEach((question, index) => {
       const isCorrect = answers[index] === question.correctAnswer;
@@ -83,11 +79,9 @@ router.post('/submit-quiz', auth, async (req, res) => {
 
     if (progressIndex > -1) {
       const existingScore = user.progress[progressIndex].quizScore || 0;
-      // Only update score if the new one is higher
       if (percentageScore > existingScore) {
         user.progress[progressIndex].quizScore = percentageScore;
       }
-      // Mark as completed if they ever get 100, regardless of it being the highest score
       if (user.progress[progressIndex].quizScore === 100) {
         user.progress[progressIndex].completed = true;
       }
@@ -103,7 +97,7 @@ router.post('/submit-quiz', auth, async (req, res) => {
 
     res.json({
       score: percentageScore,
-      detailedResults: detailedResults, // Send detailed results to the frontend
+      detailedResults: detailedResults,
       progress: user.progress
     });
 
@@ -113,9 +107,6 @@ router.post('/submit-quiz', auth, async (req, res) => {
   }
 });
 
-// @route   POST api/progress/save-code
-// @desc    Save user's code for a module
-// @access  Private
 router.post('/save-code', auth, async (req, res) => {
   const { moduleId, code } = req.body;
 
@@ -134,7 +125,6 @@ router.post('/save-code', auth, async (req, res) => {
     if (progressIndex > -1) {
       user.progress[progressIndex].userCode = code;
     } else {
-      // This case is unlikely if user visits module page first, but good to have
       user.progress.push({ moduleId, completed: false, userCode: code });
     }
 

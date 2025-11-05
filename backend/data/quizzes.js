@@ -10,7 +10,7 @@ const quizzes = {
           "_variable_name",
           "variable name"
         ],
-        correctAnswer: 2 // Index of the correct option
+        correctAnswer: 2
       },
       {
         question: "Bagaimana cara menulis komentar satu baris di Python?",

@@ -9,14 +9,13 @@ import API_BASE_URL from '../apiConfig';
 
 function ModulePage() {
   const { moduleId } = useParams();
-  const [view, setView] = useState('materi'); // 'materi', 'quiz', 'result'
+  const [view, setView] = useState('materi');
   const [quizResult, setQuizResult] = useState(null);
-  const [initialCode, setInitialCode] = useState(null); // To hold the code for the editor
+  const [initialCode, setInitialCode] = useState(null);
 
   const module = modules.find((m) => m.id === moduleId);
 
   useEffect(() => {
-    // Reset views and code when module changes
     setView('materi');
     setQuizResult(null);
     setInitialCode(null);
@@ -24,20 +23,17 @@ function ModulePage() {
     const setupModule = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
-        // If no token, use default code and skip API calls
         setInitialCode(module?.defaultCode || "# Silakan login untuk menyimpan kodemu\nprint('Hello, World!')");
         return;
       }
 
       try {
-        // Ensure progress entry exists. This also marks the module as started.
         await fetch(`${API_BASE_URL}/api/progress/complete-module`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'x-auth-token': token },
           body: JSON.stringify({ moduleId }),
         });
 
-        // Fetch full user data to get saved code
         const userRes = await fetch(`${API_BASE_URL}/api/auth/me`, {
           headers: { 'x-auth-token': token },
         });
@@ -46,13 +42,11 @@ function ModulePage() {
           const userData = await userRes.json();
           const progress = userData.progress.find(p => p.moduleId === moduleId);
           
-          // Use saved code, or module default code, or a final fallback
           const savedCode = progress?.userCode;
           const defaultCode = module?.defaultCode || "# Tulis kodemu di sini\nprint('Hello, World!')";
           
           setInitialCode(savedCode ?? defaultCode);
         } else {
-          // If fetching user fails, use default code
           setInitialCode(module?.defaultCode || "# Gagal memuat kode tersimpan\nprint('Hello, World!')");
         }
       } catch (error) {

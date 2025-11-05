@@ -4,7 +4,6 @@ const User = require('../models/User');
 const path = require('path');
 const multer = require('multer');
 
-// --- Multer Configuration for Avatar Uploads ---
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'public/uploads/avatars/');
@@ -26,11 +25,10 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ 
   storage: storage,
   limits: {
-    fileSize: 1024 * 1024 * 2 // 2MB file size limit
+    fileSize: 1024 * 1024 * 2
   },
   fileFilter: fileFilter
 });
-// ------------------------------------------------
 
 const router = express.Router();
 
@@ -128,11 +126,7 @@ router.get('/me', auth, async (req, res) => {
   }
 });
 
-// @route   PUT api/auth/me/avatar
-// @desc    Update user avatar
-// @access  Private
 router.put('/me/avatar', auth, async (req, res) => {
-  // Allow avatar to be a string or null, but the field must be present
   if (req.body.avatar === undefined) {
     return res.status(400).json({ msg: 'Avatar field is required' });
   }
@@ -142,8 +136,8 @@ router.put('/me/avatar', auth, async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
       req.user.id,
       { $set: { avatar: avatar } },
-      { new: true } // Return the updated document
-    ).select('-password'); // Exclude password from the result
+      { new: true }
+    ).select('-password');
 
     if (!updatedUser) {
       return res.status(404).json({ msg: 'User not found' });
@@ -156,16 +150,12 @@ router.put('/me/avatar', auth, async (req, res) => {
   }
 });
 
-// @route   POST api/auth/me/avatar/upload
-// @desc    Upload a custom user avatar
-// @access  Private
 router.post('/me/avatar/upload', auth, upload.single('avatar'), async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ msg: 'Please upload a file.' });
   }
 
   try {
-    // The file path that will be saved to the DB
     const avatarPath = path.join('avatars', req.file.filename).replace(/\\/g, '/');
 
     const updatedUser = await User.findByIdAndUpdate(
@@ -184,7 +174,6 @@ router.post('/me/avatar/upload', auth, upload.single('avatar'), async (req, res)
     res.status(500).send('Server error');
   }
 }, (error, req, res, next) => {
-  // Custom error handler for multer
   res.status(400).json({ msg: error.message });
 });
 

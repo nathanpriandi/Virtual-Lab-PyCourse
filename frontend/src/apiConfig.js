@@ -1,8 +1,3 @@
-/**
- * The base URL for the backend API.
- * In development, this is an empty string to use the Vite proxy.
- * In production, this is the URL of the deployed backend from environment variables.
- */
 const API_BASE_URL = 'https://virtual-lab-pycourse-production.up.railway.app';
 
 if (import.meta.env.PROD && !API_BASE_URL) {

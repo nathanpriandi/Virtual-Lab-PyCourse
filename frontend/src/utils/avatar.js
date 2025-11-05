@@ -1,6 +1,5 @@
 import API_BASE_URL from '../apiConfig';
 
-// UTF-8 safe Base64 encoding
 const utf8_to_b64 = (str) => {
   return btoa(unescape(encodeURIComponent(str)));
 }

@@ -11,7 +11,6 @@ function Navbar() {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
-  // Effect to check token and fetch user on mount
   useEffect(() => {
     const validateUser = async () => {
       const token = localStorage.getItem('token');
@@ -23,7 +22,6 @@ function Navbar() {
           if (response.ok) {
             setUser(await response.json());
           } else {
-            // Invalid token found, clear it and redirect
             localStorage.removeItem('token');
             setUser(null);
             navigate('/auth', { replace: true });
@@ -38,7 +36,6 @@ function Navbar() {
     validateUser();
   }, [navigate]);
 
-  // Effect to listen for storage changes (logout from other tabs)
   useEffect(() => {
     const handleStorageChange = (e) => {
       if (e.key === 'token' && e.newValue === null) {
@@ -52,7 +49,6 @@ function Navbar() {
     };
   }, [navigate]);
 
-  // Effect to close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {

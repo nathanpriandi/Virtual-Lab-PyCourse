@@ -26,7 +26,7 @@
 }
 
 .homeButtonContainer {
-  padding: 0 2rem; /* Match materiSide padding */
+  padding: 0 2rem;
 }
 
 .homeButton {
@@ -183,9 +183,8 @@
 }
 
 .materiSide pre code {
-  /* FIX: Ensure high contrast for code text inside the dark <pre> block */
   background-color: transparent !important;
-  color: #f8f8f2 !important; /* Light color for readability on dark background */
+  color: #f8f8f2 !important;
   padding: 0;
   border-radius: 0;
   font-size: inherit;
@@ -221,7 +220,6 @@
   }
 }
 
-/* --- Quiz Integration Styles --- */
 .startQuizContainer {
   margin-top: 3rem;
   padding: 2rem;
@@ -310,14 +308,13 @@
 
 .quizView .materiSide {
   flex-basis: 100%;
-  padding: 2rem 4rem; /* More horizontal padding for a centered feel */
+  padding: 2rem 4rem;
 }
 
 .quizView .editorSide {
   display: none;
 }
 
-/* --- Quiz Summary Styles --- */
 .quizSummary {
   display: flex;
   justify-content: space-around;
