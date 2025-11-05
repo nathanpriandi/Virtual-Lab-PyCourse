@@ -62,8 +62,12 @@ router.post('/submit-quiz', auth, async (req, res) => {
 
   try {
     let score = 0;
+    const detailedResults = []; // To hold the correctness of each answer
+
     quiz.questions.forEach((question, index) => {
-      if (answers[index] === question.correctAnswer) {
+      const isCorrect = answers[index] === question.correctAnswer;
+      detailedResults.push({ questionIndex: index, correct: isCorrect });
+      if (isCorrect) {
         score++;
       }
     });
@@ -94,6 +98,7 @@ router.post('/submit-quiz', auth, async (req, res) => {
 
     res.json({
       score: percentageScore,
+      detailedResults: detailedResults, // Send detailed results to the frontend
       progress: user.progress
     });
 

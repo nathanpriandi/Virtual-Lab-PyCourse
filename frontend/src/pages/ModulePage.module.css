@@ -316,3 +316,67 @@
 .quizView .editorSide {
   display: none;
 }
+
+/* --- Quiz Summary Styles --- */
+.quizSummary {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+  background-color: #f9fafb;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.summaryItem {
+  text-align: center;
+}
+
+.summaryItem span {
+  display: block;
+}
+
+.summaryItem .summaryValue {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+}
+
+.summaryValue.correct {
+  color: #22c55e;
+}
+
+.summaryValue.incorrect {
+  color: #ef4444;
+}
+
+.incorrectList {
+  margin-top: 2rem;
+  text-align: left;
+  width: 100%;
+  max-width: 400px;
+}
+
+.incorrectList h3 {
+  font-size: 1.25rem;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.incorrectList ul {
+  list-style: none;
+  padding: 0;
+}
+
+.incorrectList li {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}

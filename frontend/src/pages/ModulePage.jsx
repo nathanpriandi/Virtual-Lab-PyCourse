@@ -106,11 +106,46 @@ function ModulePage() {
       case 'quiz':
         return <Quiz quizData={module.quiz} onQuizComplete={handleQuizComplete} />;
       case 'result':
+        if (!quizResult || !quizResult.detailedResults) {
+          return <div className={styles.resultContainer}>Loading results...</div>;
+        }
+
+        const correctAnswers = quizResult.detailedResults.filter(r => r.correct).length;
+        const totalQuestions = quizResult.detailedResults.length;
+        const incorrectAnswers = totalQuestions - correctAnswers;
+
         return (
           <div className={styles.resultContainer}>
             <h2>Hasil Kuis</h2>
             <p className={styles.scoreText}>Skor Anda:</p>
             <p className={styles.scoreValue}>{quizResult.score}%</p>
+
+            <div className={styles.quizSummary}>
+              <div className={styles.summaryItem}>
+                <span>Benar</span>
+                <span className={`${styles.summaryValue} ${styles.correct}`}>{correctAnswers}</span>
+              </div>
+              <div className={styles.summaryItem}>
+                <span>Salah</span>
+                <span className={`${styles.summaryValue} ${styles.incorrect}`}>{incorrectAnswers}</span>
+              </div>
+              <div className={styles.summaryItem}>
+                <span>Total</span>
+                <span className={styles.summaryValue}>{totalQuestions}</span>
+              </div>
+            </div>
+
+            {incorrectAnswers > 0 && (
+              <div className={styles.incorrectList}>
+                <h3>Perlu Diperbaiki:</h3>
+                <ul>
+                  {quizResult.detailedResults.map((result, index) => (
+                    !result.correct && <li key={index}>Pertanyaan #{index + 1}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             {quizResult.score === 100 && <p className={styles.congratsMessage}>Kerja bagus! Modul ini telah ditandai selesai.</p>}
             <button onClick={() => setView('materi')} className={styles.primaryButton}>
               Kembali ke Materi
