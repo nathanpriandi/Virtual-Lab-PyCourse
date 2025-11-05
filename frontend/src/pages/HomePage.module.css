@@ -1,13 +1,13 @@
 .moduleCard {
   border-radius: 16px;
-  border: 1px solid #e2e8f0; /* Slightly more subtle border */
+  border: 1px solid #e2e8f0;
   background: white;
   display: flex;
   flex-direction: column;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* More subtle shadow */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   position: relative;
-  overflow: visible; /* Changed to visible to allow badge to overflow */
+  overflow: visible;
 }
 
 .moduleCard::before {
@@ -29,13 +29,13 @@
 
 .moduleCard:hover {
   transform: translateY(-8px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1); /* More pronounced hover shadow */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
   border-color: #c7d2fe;
 }
 
 .moduleImage {
   width: 100%;
-  aspect-ratio: 16 / 9; /* Modern 16:9 aspect ratio */
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   border-bottom: 1px solid #e2e8f0;
   border-radius: 16px 16px 0 0;
@@ -67,7 +67,7 @@
 }
 
 .cardContent {
-  padding: 1.25rem; /* Slightly adjusted padding */
+  padding: 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -76,7 +76,7 @@
 
 .moduleCard h4 {
   margin: 0;
-  font-size: 1.15rem; /* Slightly adjusted font size */
+  font-size: 1.15rem;
   color: var(--navy-blue);
   font-weight: 600;
   transition: color 0.3s ease;
@@ -114,7 +114,7 @@
 }
 
 .moduleCard.completed {
-  border-color: #bbf7d0; /* Lighter green border */
+  border-color: #bbf7d0;
   background: #f0fdf4;
 }
 
@@ -153,7 +153,7 @@
   display: flex;
   justify-content: center;
   gap: 2rem;
-  margin: 0 auto 2rem auto; /* Added margin-bottom */
+  margin: 0 auto 2rem auto;
   flex-wrap: wrap;
 }
 
@@ -173,10 +173,8 @@
   font-weight: 700;
 }
 
-/* --- Special Centered Layout for Specific Card --- */
 .centeredImageCard .moduleImage {
   width: 90%;
   margin: 1rem auto 0;
   border-radius: 8px;
-  /* The aspect-ratio and object-fit from the default .moduleImage style will still apply */
 }

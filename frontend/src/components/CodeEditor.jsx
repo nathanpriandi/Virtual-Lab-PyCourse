@@ -7,7 +7,6 @@ import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { EditorView } from '@codemirror/view';
 import API_BASE_URL from '../apiConfig';
 
-// Debounce hook
 const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
@@ -28,14 +27,12 @@ function CodeEditor({ moduleId, initialCode }) {
   const [isExecuting, setIsExecuting] = useState(false);
   const pyodideRef = useRef(null);
 
-  const debouncedCode = useDebounce(code, 1500); // 1.5 second debounce delay
+  const debouncedCode = useDebounce(code, 1500);
 
-  // Effect to auto-save the debounced code
   useEffect(() => {
     const saveCode = async () => {
       const token = localStorage.getItem('token');
       if (!token || debouncedCode === initialCode) {
-        // Don't save if user is not logged in or code hasn't changed from initial
         return;
       }
 
@@ -48,7 +45,6 @@ function CodeEditor({ moduleId, initialCode }) {
           },
           body: JSON.stringify({ moduleId, code: debouncedCode }),
         });
-        // console.log('Code saved'); // Optional: for debugging
       } catch (error) {
         console.error('Failed to save code:', error);
       }
@@ -57,7 +53,6 @@ function CodeEditor({ moduleId, initialCode }) {
     saveCode();
   }, [debouncedCode, moduleId, initialCode]);
 
-  // Effect to load Pyodide
   useEffect(() => {
     async function setupPyodide() {
       try {
@@ -86,7 +81,6 @@ function CodeEditor({ moduleId, initialCode }) {
     setupPyodide();
   }, []);
 
-  // Reset code when the initialCode prop changes (i.e., when navigating to a new module)
   useEffect(() => {
     setCode(initialCode);
   }, [initialCode]);
@@ -125,7 +119,7 @@ function CodeEditor({ moduleId, initialCode }) {
         value={code}
         onChange={onCodeChange}
         className={styles.editorWrapper}
-        theme={vscodeDark} // Changed to dark theme to match output
+        theme={vscodeDark}
         height='100%'
         extensions={[python(), EditorView.lineWrapping]}
         basicSetup={{

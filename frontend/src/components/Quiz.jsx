@@ -29,7 +29,6 @@ function Quiz({ quizData, onQuizComplete }) {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    // Convert selectedAnswers object to a simple array
     const answers = quizData.questions.map((_, index) => selectedAnswers[index] ?? null);
     await onQuizComplete(answers);
     setIsSubmitting(false);
